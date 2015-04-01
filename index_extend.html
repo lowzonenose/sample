@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Sample Loader</title>
+        <link rel="stylesheet" type="text/css" href="css/content.css">
+        <script type="text/javascript" src="src/loader.js"></script>
+        <script type="text/javascript" src="src/loader-extend.js"></script>
+        <script type="text/javascript">
+			
+            var loader_extend  = new LoaderExtend({
+                // overwritten
+                onsuccess:function() {
+                    console.log("It's all right!");
+                }
+            });
+            
+            loader_extend.require([
+                "samples/utils.js",
+                "samples/script-1.js",
+                "samples/script-2.js",
+                "samples/script-1_1.js",
+                "samples/script-1_2.js",
+                "samples/script-1_3.js"]
+            );
+			
+        </script>
+    </head>
+    <body>
+        <div id="loader">Exemple d'implementation d'un héritage de classe JS</div>
+    </body>
+</html>

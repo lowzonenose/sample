@@ -1,0 +1,7 @@
+# download
+version jasmine standalone v2.2.0
+https://github.com/jasmine/jasmine/releases/tag/v2.2.0
+
+# executer
+SpecRunner.html dans un navigateur
+puis, ouvrir la console

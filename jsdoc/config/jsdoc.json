@@ -1,0 +1,41 @@
+{
+	"tags"      : {
+		"allowUnknownTags" : true
+	},
+	"plugins"   : ["plugins/markdown"],
+        "source"    : {
+		"include" : [
+                        "../../src/",
+                        "../../README.md"
+		]
+	},
+	"templates" : {
+		"cleverLinks"           : false,
+		"monospaceLinks"        : false,
+		"dateFormat"            : "ddd MMM Do YYYY",
+		"outputSourceFiles"     : true,
+		"outputSourcePath"      : true,
+		"systemName"            : "Sample Class JS",
+		"footer"                : "version 1.0.0",
+		"copyright"             : "Geoportail - Copyright (c) IGN, released under the BSD license",
+		"navType"               : "vertical",
+		"theme"                 : "cerulean",
+		"linenums"              : true,
+		"collapseSymbols"       : false,
+		"inverseNav"            : true,
+		"highlightTutorialCode" : true
+	},
+	"markdown"  : {
+		"parser"   : "gfm",
+		"hardwrap" : true
+	},
+        "opts": {
+            "template": "modules/ink-docstrap/template/",
+            "encoding": "utf8",
+            "destination": "../build/",
+            "recurse": true,
+            "lenient": true,
+	    "verbose": true,
+            "tutorials": "../../tutorials"
+        }
+}

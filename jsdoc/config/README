@@ -1,0 +1,8 @@
+Nettoyage
+> rm -rf ./jsdoc/build/*
+
+JSDoc
+> cd ./jsdoc/config
+> ./modules/jsdoc/jsdoc.js -c jsdoc.json 
+
+puis, executer dans un navigateur ./jsdoc/build/index.html
