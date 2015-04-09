@@ -36,6 +36,6 @@
             "recurse": true,
             "lenient": true,
 	    "verbose": true,
-            "tutorials": "../../tutorials"
+            "tutorials": "./tutorials"
         }
 }

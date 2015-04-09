@@ -17,13 +17,17 @@ var TemplateExtend = (function () {
         // appel du constructeur de la classe mère avec passage de param.
         Template.call(this, arguments);
 
+        // attribut de l'instance
         this.attributs_extends = {};
     }
 
+    // attribut de la classe
     TemplateExtend.ATTRIBUTS_EXTENDS = {};
 
+    // méthode static
     TemplateExtend.staticMethod = function () {};
 
+    // héritage
     TemplateExtend.prototype = Object.create(Template.prototype);
 
     // surcharge car appel d'une méthode privée de la classe mère

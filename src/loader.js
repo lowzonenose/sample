@@ -4,10 +4,11 @@
  *  Référence sur l'implementation d'une classe en JS :
  *  cf. http://code-weblog.com/programmation-orientee-objet-en-javascript/
  *  
- * @namespace Loader
+ * @namespace GP
  * @module Loader
  */
-var Loader = (function () {
+var GP = GP || {};
+GP .Loader = (function () {
 	
     // INFO
     // Forces the JavaScript engine into strict mode

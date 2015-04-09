@@ -21,7 +21,7 @@ describe("Loader", function() {
     };
 
     beforeEach(function() {
-        loader = new Loader(options);
+        loader = new GP.Loader(options);
     });
 
     it("OK : chargement des scripts 1", function() {
@@ -48,7 +48,7 @@ describe("Loader", function() {
     
     it("OK : chargement des scripts avec options par defaut", function() {
         
-        var MyLoader = new Loader();
+        var MyLoader = new GP.Loader();
         MyLoader.require([
         "../../samples/script-1.js",
         "../../samples/script-2.js"], 
@@ -94,7 +94,7 @@ describe("Loader", function() {
     
     it("OK : chargement des scripts dans le tag <body>", function() {
         
-        var MyLoader = new Loader({insert:false});
+        var MyLoader = new GP.Loader({insert:false});
         MyLoader.require([
         "../../samples/script-1.js",
         "../../samples/script-2.js"], 
@@ -125,7 +125,7 @@ describe("Loader", function() {
     
     it("OK : synchronisation du chargement des scripts (mode asynchrone)", function() {
         
-        var MyLoader = new Loader({async:true});
+        var MyLoader = new GP.Loader({async:true});
         
         MyLoader.require([
             "../../samples/utils.js",
@@ -151,7 +151,7 @@ describe("Loader", function() {
         // FIXME
         // le callback d'erreur n'est pas executé !
         // l'exception n'est pas interceptée...
-        var MyLoader = new Loader();
+        var MyLoader = new GP.Loader();
         MyLoader.require([
             "../../samples/utils.js",
             "../../samples/script-1_3.js", // Exception car Classe non déclarée !
@@ -172,12 +172,38 @@ describe("Loader", function() {
         );
     });
     
+    it("OK : SETTINGS du loader", function() {
+        
+        GP.Loader.SETTINGS = {
+            scope    : this,
+            insert   : true,
+            async    : false,
+            onerror  : function (message) {
+                console.log("[NOK] onerror : " + message);
+            },
+            onsuccess: function(message) {
+                console.log("[OK] onsuccess : " + message);
+            }
+        };
+        
+        var MyLoader = new GP.Loader();
+
+        MyLoader.require([
+            "../../samples/script-1.js",
+            "../../samples/script-2.js"]
+        );
+    });
     it("[TEST] JASMINE NOK...", function() {
 
+        
+        
+        
+        var observer = {callback: function(){}};
+            
         var options = {
             scope:this,
             async:false,
-            onsuccess: function(message) {
+            onsuccess: function (message) {
                 console.log("[SUCCES] " + message);
             },
             onerror: function(message) {
@@ -185,21 +211,33 @@ describe("Loader", function() {
             }
         };
         
-        spyOn(Loader.prototype, "onLoadError");
-        spyOn(Loader.prototype, "onLoadSuccess");
-        spyOn(options, "onsuccess");
-        spyOn(Loader.SETTINGS, "onsuccess");
+        spyOn(observer, "callback");
         
-        var myloader = new Loader(options);
+        var myloader = new GP.Loader(options);
         
-        myloader.require([
-            "../../samples/script-1.js",
-            "../../samples/script-2.js"]);
+            myloader.require([
+                "../../samples/script-1.js",
+                "../../samples/script-2.js"],
+            function(){
+                observer.callback();
+            });
         
-        expect(myloader.onLoadError).not.toHaveBeenCalled();// not ???
-        expect(myloader.onLoadSuccess).not.toHaveBeenCalled(); // not ???
-        expect(options.onsuccess).not.toHaveBeenCalled(); // not ???
-        expect(myloader.options.onsuccess).not.toHaveBeenCalledWith("[SUCCES] All Scripts Loaded!"); // not ???
-
+        expect(options.callback).toHaveBeenCalled();
+                // .toHaveBeenCalledWith(jasmine.stringMatching("[SUCCES]"));
+        
+        
+        
     });
+    
+    it("[TEST] JASMINE SAMPLE...", function() {
+         
+     
+        var callback = jasmine.createSpy('callback');
+        
+        callback('foobarbaz');
+
+        expect(callback).toHaveBeenCalledWith(jasmine.stringMatching('bar'));
+        expect(callback).not.toHaveBeenCalledWith(jasmine.stringMatching(/^bar$/));
+    });
+   
 });

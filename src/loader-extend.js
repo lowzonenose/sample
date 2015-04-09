@@ -1,11 +1,12 @@
 /**
  * Description
  * 
- * @namespace LoaderExtend
+ * @namespace GP
  * @module LoaderExtend
  * @extends Loader
  */
-var LoaderExtend = (function () {
+var GP = GP || {};
+GP.LoaderExtend = (function () {
     
     "use strict";
     
@@ -24,7 +25,7 @@ var LoaderExtend = (function () {
         // INFO
         // appel du constructeur de la classe mère
         // avec passage de param.
-        Loader.apply(this, arguments);
+        GP.Loader.apply(this, arguments);
         
         // INFO
         // autre manière d'appeller le constructeur :
@@ -39,7 +40,7 @@ var LoaderExtend = (function () {
     /**
      * heritage des comportements de la classe mère
      */
-    LoaderExtend.prototype = Object.create(Loader.prototype);
+    LoaderExtend.prototype = Object.create(GP.Loader.prototype);
     
     /**
      * surcharge d'un comportement de la classe mère
@@ -81,11 +82,9 @@ var LoaderExtend = (function () {
             
         var self = this;
 
-        var oScript = document.createElement('script');
+        var oScript  = document.createElement('script');
         oScript.type = "text/javascript";
-        // FIXME async or defer !?
-        oScript.async = this.options.async;
-        oScript.src = src;
+        oScript.src  = src;
 
         /**
          * Méthodes d'instance
