@@ -2,6 +2,8 @@ Template d'une classe avec héritage
 
 Class *TemplateExtend* extends *Template*
 
+Méthode utilisée : Heritage par prototype
+
 ```javascript
 
 var TemplateExtend = (function () {
@@ -42,4 +44,24 @@ var TemplateExtend = (function () {
     function __privateMethod_2(settings) {};
 
 }());
+```
+
+L'heritage par prototype permet de rendre accessible les méthodes et attributs publiques de 
+la classe mère. 
+
+```javascript
+var Template = (function () {
+
+    function Template() {
+        this.attributs = {}; // hérité car appel du constructeur 
+    };
+
+    // méthodes privées non héritées !
+    
+    // heritage du prototype
+    Template.prototype = {
+        constructor: Template
+    };
+}());
+
 ```

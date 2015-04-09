@@ -123,7 +123,23 @@ var Template = (function () {
     function __privateMethod_1() {};
     function __privateMethod_2(settings) {};
 
-}());</code></pre>
+}());</code></pre><p>Appel</p>
+<pre class="prettyprint source lang-javascript"><code>
+var MyTemplate = new Template();
+MyTemplate.publicMethod_0();
+MyTemplate.publicMethod_1();
+MyTemplate.publicMethod_2();
+
+Template.staticMethod();
+
+Template.ATTRIBUTS = {/* ... */};</code></pre><p>Oups!</p>
+<pre class="prettyprint source lang-javascript"><code>
+// appel sans mot clef 'new'
+var MyTemplate = Template(); // --> FAILED : TypeError: Template constructor cannot be called as a function.
+
+// appel d'une méthode private
+var MyTemplate = new Template();
+MyTemplate.__privateMethod_1(); // --> FAILED : TypeError: undefined is not a function.</code></pre>
 </article>
 
 </section>

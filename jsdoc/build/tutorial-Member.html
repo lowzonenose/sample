@@ -91,10 +91,8 @@
             return Template.ATTRIBUTS;
         }
     };
-}());
-
-// appel 
- Template.ATTRIBUTS = {
+}());</code></pre><p>Appel </p>
+<pre class="prettyprint source lang-javascript"><code> Template.ATTRIBUTS = {
     attr1: &quot;test&quot;,
     attr2: &quot;test&quot;
 };
@@ -126,10 +124,8 @@ MyTemplate.getAttributs(); // RETURN : {attr1: &quot;test&quot;, attr2: &quot;te
             return this.attributs.data;
         }
     };
-}());
-
-// appel
-var MyTemplate = new Template();
+}());</code></pre><p>Appel</p>
+<pre class="prettyprint source lang-javascript"><code>var MyTemplate = new Template();
 MyTemplate.attributs.data.push(&quot;test&quot;);
 MyTemplate.getAttributs(); // RETURN : [&quot;test&quot;]</code></pre><ul>
 <li>private</li>

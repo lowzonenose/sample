@@ -24,8 +24,11 @@ var Template = (function () {
         }
     };
 }());
+```
 
-// appel 
+Appel 
+
+```javascript
  Template.ATTRIBUTS = {
     attr1: "test",
     attr2: "test"
@@ -65,7 +68,10 @@ var Template = (function () {
     };
 }());
 
-// appel
+```
+
+Appel
+```javascript
 var MyTemplate = new Template();
 MyTemplate.attributs.data.push("test");
 MyTemplate.getAttributs(); // RETURN : ["test"]

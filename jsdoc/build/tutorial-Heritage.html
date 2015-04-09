@@ -70,6 +70,7 @@
 <article>
     <p>Template d'une classe avec héritage</p>
 <p>Class <em>TemplateExtend</em> extends <em>Template</em></p>
+<p>Méthode utilisée : Heritage par prototype</p>
 <pre class="prettyprint source lang-javascript"><code>
 var TemplateExtend = (function () {
 
@@ -108,6 +109,20 @@ var TemplateExtend = (function () {
     function __privateMethod_1() {};
     function __privateMethod_2(settings) {};
 
+}());</code></pre><p>L'heritage par prototype permet de rendre accessible les méthodes et attributs publiques de 
+la classe mère. </p>
+<pre class="prettyprint source lang-javascript"><code>var Template = (function () {
+
+    function Template() {
+        this.attributs = {}; // hérité car appel du constructeur 
+    };
+
+    // méthodes privées non héritées !
+
+    // heritage du prototype
+    Template.prototype = {
+        constructor: Template
+    };
 }());</code></pre>
 </article>
 

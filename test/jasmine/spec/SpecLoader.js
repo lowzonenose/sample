@@ -1,4 +1,4 @@
-/* global Loader, expect */
+/* global Loader, expect, GP */
 
 /**
  * Fonctionnement de Jasmine 
@@ -13,10 +13,10 @@ describe("Loader", function() {
         scope:this,
         async:false,
         onsuccess: function(message) {
-            console.log("[SUCCES] " + message);
+            console.log("[MYSUCCES] " + message);
         },
         onerror: function(message) {
-            console.log("[ERREUR] " + message);
+            console.log("[MYERREUR] " + message);
         }
     };
 
@@ -172,7 +172,7 @@ describe("Loader", function() {
         );
     });
     
-    it("OK : SETTINGS du loader", function() {
+    it("OK : Loader.SETTINGS", function() {
         
         GP.Loader.SETTINGS = {
             scope    : this,
@@ -193,11 +193,45 @@ describe("Loader", function() {
             "../../samples/script-2.js"]
         );
     });
+    
+    it("OK : Appel Loader sans le mot clef 'new'", function() {
+        
+        var error = true;
+        try {
+            var MyLoader = GP.Loader();
+
+            MyLoader.require([
+                "../../samples/script-1.js",
+                "../../samples/script-2.js"]
+            );
+    
+            error = false;
+            
+        } catch (e) {
+            console.log("[ERROR] " + e);
+            expect(error).toBe(true);
+        }
+    });
+    
+    it("OK : Appel d'une méthode privée", function() {
+        
+        var error = true;
+        try {
+            var MyLoader = new GP.Loader();
+
+            MyLoader.__importScript("../../samples/script-1.js");
+    
+            error = false;
+            
+        } catch (e) {
+            console.log("[ERROR] " + e);
+            expect(error).toBe(true);
+        }
+    });
+    
+    // TEST à la con ...
     it("[TEST] JASMINE NOK...", function() {
 
-        
-        
-        
         var observer = {callback: function(){}};
             
         var options = {
@@ -228,10 +262,8 @@ describe("Loader", function() {
         
         
     });
-    
     it("[TEST] JASMINE SAMPLE...", function() {
-         
-     
+
         var callback = jasmine.createSpy('callback');
         
         callback('foobarbaz');
