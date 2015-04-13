@@ -1,4 +1,4 @@
-/* global Loader, expect, GP */
+/* global Loader, expect, GP, spyOn */
 
 /**
  * Fonctionnement de Jasmine 
@@ -24,17 +24,17 @@ describe("Loader", function() {
         loader = new GP.Loader(options);
     });
 
-    it("OK : chargement des scripts 1", function() {
-        
-        var myMessage = "all scipts are loaded !";
+    it("OK : chargement des scripts 1", function(done) {
+        var myMessage = "loading script";
         
         loader.require([
         "../../samples/script-1.js",
         "../../samples/script-2.js"], 
-        function() {
+        function(message) {
             // Callback
-            console.log(myMessage);
-            console.log("OK");
+            console.log(message);
+            expect(myMessage).toEqual(jasmine.stringMatching(/loading script/));
+            done();
         });
         
     });
@@ -46,7 +46,7 @@ describe("Loader", function() {
             "../../samples/script-2.js"]);
     });
     
-    it("OK : chargement des scripts avec options par defaut", function() {
+    it("OK : chargement des scripts avec options par defaut", function(done) {
         
         var MyLoader = new GP.Loader();
         MyLoader.require([
@@ -55,12 +55,8 @@ describe("Loader", function() {
         function(message) {
             // Callback
             console.log(message);
-            console.log("OK");
-        },
-        function(message) {
-            // Callback
-            console.log(message);
-            console.log("NOK");
+            expect(message).toEqual("All Scripts Loaded!");
+            done();
         });
     });
     
@@ -73,26 +69,23 @@ describe("Loader", function() {
     
     });
     
-    it("OK : chargement des scripts avec un probleme d'import 2", function() {
-        
+    it("OK : chargement des scripts avec un probleme d'import 2", function(done) {
+           
         loader.require([
-        "../../samples/script-1.js",
-        "../../samples/script-2.js",
+        // "../../samples/script-1.js",
+        // "../../samples/script-2.js",
         "../../samples/script-3.js"],
+        function() {},
         function(message) {
             // Callback
             console.log(message);
-            console.log("OK");
-        },
-        function(message) {
-            // Callback
-            console.log(message);
-            console.log("NOK");
+            expect(message).toEqual(jasmine.stringMatching(/is not accessible/));
+            done();
         });
     
     });
     
-    it("OK : chargement des scripts dans le tag <body>", function() {
+    it("OK : chargement des scripts dans le tag <body>", function(done) {
         
         var MyLoader = new GP.Loader({insert:false});
         MyLoader.require([
@@ -101,15 +94,38 @@ describe("Loader", function() {
         function(message) {
             // Callback
             console.log(message);
-            console.log("OK");
+            var scripts = document.body.getElementsByTagName("script");
+            expect(scripts.length).toEqual(2);
+            done();
         });
     });
     
-    it("OK : chargement des scripts dans le tag <head>", function() {
+    it("OK : chargement des scripts dans le tag <head>", function(done) {
         
-        loader.require([
-        "../../samples/script-1.js",
-        "../../samples/script-2.js"]);
+        var script1 = "../../samples/script-1.js";
+        var script2 = "../../samples/script-2.js";
+        loader.require([ script1,script2 ],
+        function(message) {
+            // Callback
+            console.log(message);
+            var scripts = document.head.getElementsByTagName("script");
+            var regex1 = new RegExp(script1);
+            var regex2 = new RegExp(script2);
+            var count = 0;
+            for(var i=0; i<scripts.length; i++) {
+                
+                if(regex1.test(scripts[i].outerHTML)) {
+                    count++;
+                }
+                
+                if(regex2.test(scripts[i].outerHTML)) {
+                    count++;
+                }
+            }
+            expect(count).toBeTruthy();
+            expect(count).toBeGreaterThan(1);
+            done();
+        });
     });
     
     it("OK : synchronisation du chargement des scripts (par defaut)", function() {
@@ -123,7 +139,7 @@ describe("Loader", function() {
             "../../samples/script-2.js"]);
     });
     
-    it("OK : synchronisation du chargement des scripts (mode asynchrone)", function() {
+    it("OK : synchronisation du chargement des scripts (mode asynchrone)", function(done) {
         
         var MyLoader = new GP.Loader({async:true});
         
@@ -137,12 +153,8 @@ describe("Loader", function() {
             function(message) {
                 // Callback
                 console.log(message);
-                console.log("OK");
-            },
-            function(message) {
-                // Callback
-                console.log(message);
-                console.log("NOK");
+                expect(message).toEqual(jasmine.stringMatching(/Scripts Loaded/));
+                done();
             }
         );
     });
@@ -163,11 +175,6 @@ describe("Loader", function() {
                 // Callback
                 console.log(message);
                 console.log("OK");
-            },
-            function(message) {
-                // Callback
-                console.log(message);
-                console.log("NOK");
             }
         );
     });
@@ -206,10 +213,12 @@ describe("Loader", function() {
             );
     
             error = false;
+            expect(error).toBe(false);
             
         } catch (e) {
             console.log("[ERROR] " + e);
             expect(error).toBe(true);
+            expect(e.message).toEqual(jasmine.stringMatching(/Loader constructor cannot be called as a function/));
         }
     });
     
@@ -222,54 +231,12 @@ describe("Loader", function() {
             MyLoader.__importScript("../../samples/script-1.js");
     
             error = false;
+            expect(error).toBe(false);
             
         } catch (e) {
             console.log("[ERROR] " + e);
             expect(error).toBe(true);
+            expect(e.message).toEqual(jasmine.stringMatching(/undefined is not a function/));
         }
     });
-    
-    // TEST à la con ...
-    it("[TEST] JASMINE NOK...", function() {
-
-        var observer = {callback: function(){}};
-            
-        var options = {
-            scope:this,
-            async:false,
-            onsuccess: function (message) {
-                console.log("[SUCCES] " + message);
-            },
-            onerror: function(message) {
-                console.log("[ERREUR] " + message);
-            }
-        };
-        
-        spyOn(observer, "callback");
-        
-        var myloader = new GP.Loader(options);
-        
-            myloader.require([
-                "../../samples/script-1.js",
-                "../../samples/script-2.js"],
-            function(){
-                observer.callback();
-            });
-        
-        expect(options.callback).toHaveBeenCalled();
-                // .toHaveBeenCalledWith(jasmine.stringMatching("[SUCCES]"));
-        
-        
-        
-    });
-    it("[TEST] JASMINE SAMPLE...", function() {
-
-        var callback = jasmine.createSpy('callback');
-        
-        callback('foobarbaz');
-
-        expect(callback).toHaveBeenCalledWith(jasmine.stringMatching('bar'));
-        expect(callback).not.toHaveBeenCalledWith(jasmine.stringMatching(/^bar$/));
-    });
-   
 });
