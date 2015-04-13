@@ -1,6 +1,7 @@
 # Exemple d'implementation d'une classe en JS
 
 [![Coverage Status](https://coveralls.io/repos/lowzonenose/sample/badge.svg)](https://coveralls.io/r/lowzonenose/sample)
+[![Build Status](https://travis-ci.org/lowzonenose/sample.svg)](https://travis-ci.org/lowzonenose/sample)
 
 ## JSDoc
 
