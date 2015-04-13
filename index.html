@@ -3,25 +3,30 @@
     <head>
         <title>Sample Loader</title>
         <link rel="stylesheet" type="text/css" href="css/content.css">
-        <script type="text/javascript" src="src/loader.js"></script>
-        <script type="text/javascript">
-			
-            var loader  = new GP.Loader();
-                loader.require([
-                    "samples/utils.js",
-                    "samples/script-1.js",
-                    "samples/script-1_1.js",
-                    "samples/script-1_2.js",
-                    "samples/script-1_3.js",
-                    "samples/script-2.js"], 
-                    function(message) {
-                            // Callback
-                            console.log(message);
-                    });
-			
-        </script>
     </head>
     <body>
-        <div id="loader">Exemple d'implementation d'une classe JS</div>
+        <div id="title">Exemple d'implementation d'une classe JS (template) avec Heritage</div>
+        <div id="pg-sample">
+            <p class="title">
+                Page d'exemple de la classe <b>Loader</b>.
+            </p>
+            <a href="samples/sample.html">sample.html</a>
+            <p class="title">
+                Page d'exemple de la classe <b>LoaderExtend</b>.
+            </p>
+            <a href="samples/sample_extend.html">sample_extend.html</a>
+        </div>
+        <div id="pg-jsdoc">
+            <p class="title">
+                La JSdoc est générée automatiquement.
+            </p>
+            <a href="jsdoc/build/index.html">JSdoc</a>
+        </div>
+        <div id="pg-test">
+            <p class="title">
+                Page des tests unitaires sous Jasmine.
+            </p>
+            <a href="test/jasmine/SpecRunner.html">Tests</a>
+        </div>
     </body>
 </html>

@@ -2,25 +2,20 @@
 
 ## JSDoc
 
-    ### Génération 
-    > cat jsdoc/config/README
+    ### Génération
+    cf. jsdoc/config/README
 
     ### Exécution
-    > firefox jsdoc/build/index.html
+    Ouvrir la page HTML "jsdoc/build/index.html"
 
 ## Execution des Tests
-    > cat test/README
+
+    cf. test/README
 
 ## Exemples
 
     ### classe
-    >  firefox index.html
+    Ouvrir la page HTML "samples/sample.html"
 
     ### héritage
-    >  firefox index_extend.html
-
-## Tuto
-Les informations sont contenues dans :
-- la JSDOC, 
-- le répertoire ./tutorials/ 
-- le code source ./src/
+    Ouvrir la page HTML "samples/sample_extend.html"
