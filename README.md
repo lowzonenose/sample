@@ -1,5 +1,7 @@
 # Exemple d'implementation d'une classe en JS
 
+[![Coverage Status](https://coveralls.io/repos/lowzonenose/sample/badge.svg)](https://coveralls.io/r/lowzonenose/sample)
+
 ## JSDoc
 
     ### Génération
