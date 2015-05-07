@@ -1,0 +1,14 @@
+Répertoire d'execution
+> cd ./coverage/config
+
+Installation des modules
+> npm install karma-coverage --save-dev
+ou
+> npm install
+
+Clean (si necessaire...)
+> rm -rf ./coverage/build/*
+
+########################################################
+Je ne comprends pas comment cette merde peut marcher !!!
+########################################################

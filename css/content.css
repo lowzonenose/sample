@@ -1,0 +1,29 @@
+#loader {
+    font-weight: bolder;
+    color: red
+}
+#title {
+    font-weight: bolder;
+    font-size: large;
+}
+#pg-coverage,
+#pg-integration,
+#pg-jsdoc,
+#pg-sample,
+#pg-test {
+    font-size: medium;
+    
+}
+.title {
+    padding-left: 10px;
+    color: darkgrey;
+}
+a {
+    padding-left: 20px;
+}
+b {
+    color: #000000;
+}
+#code {
+    
+}
