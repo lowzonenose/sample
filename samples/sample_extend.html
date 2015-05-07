@@ -7,20 +7,23 @@
         <script type="text/javascript" src="../src/loader-extend.js"></script>
         <script type="text/javascript">
 			
-            var loader_extend  = new GP.LoaderExtend({
+            var loader_extend  = new LoaderExtend({
                 // overwritten
                 onsuccess:function() {
                     console.log("It's all right!");
+                    var node    = document.createTextNode("Loaded !");
+                    var element = document.getElementById("result");
+                    element.appendChild(node);
                 }
             });
             
             loader_extend.require([
                 "utils.js",
                 "script-1.js",
-                "script-2.js",
                 "script-1_1.js",
                 "script-1_2.js",
-                "script-1_3.js"]
+                "script-1_3.js",
+                "script-2.js"]
             );
 			
         </script>
@@ -28,7 +31,7 @@
     <body>
         <div id="loader">Exemple d'implementation d'un héritage de classe JS (cf. console)</div>
         <textarea id="code" rows="20" cols="50">
-        var loader_extend  = new GP.LoaderExtend({
+        var loader_extend  = new LoaderExtend({
                 // overwritten
                 onsuccess:function() {
                     console.log("It's all right!");
@@ -44,5 +47,6 @@
                 "script-1_3.js"]
             );
         </textarea>
+        <div id="result"></div>
     </body>
 </html>

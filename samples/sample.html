@@ -6,7 +6,7 @@
         <script type="text/javascript" src="../src/loader.js"></script>
         <script type="text/javascript">
 			
-            var loader  = new GP.Loader();
+            var loader  = new Loader();
                 loader.require([
                     "utils.js",
                     "script-1.js",
@@ -17,6 +17,9 @@
                     function(message) {
                             // Callback
                             console.log(message);
+                            var node    = document.createTextNode("Loaded !");
+                            var element = document.getElementById("result");
+                            element.appendChild(node);
                     });
 			
         </script>
@@ -24,7 +27,7 @@
     <body>
         <div id="loader">Exemple d'implementation d'une classe JS (cf. console)</div>
         <textarea id="code" rows="20" cols="50">
-        var loader  = new GP.Loader();
+        var loader  = new Loader();
             loader.require([
                 "utils.js",
                 "script-1.js",
@@ -37,5 +40,6 @@
                         console.log(message);
                 });
         </textarea>
+        <div id="result"></div>
     </body>
 </html>

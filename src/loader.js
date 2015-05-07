@@ -1,3 +1,5 @@
+/* global module */
+
 /**
  * Description
  * 
@@ -7,8 +9,8 @@
  * @namespace GP
  * @module Loader
  */
-var GP = GP || {};
-GP .Loader = (function () {
+
+Loader = (function () {
 	
     // INFO
     // Forces the JavaScript engine into strict mode
@@ -296,3 +298,5 @@ GP .Loader = (function () {
     return Loader;
     
 }());
+
+module.exports = Loader;

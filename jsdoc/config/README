@@ -1,8 +1,15 @@
-Nettoyage si necessaire...
+Répertoire d'execution
+> cd ./jsdoc/config
+
+Installation des modules
+> npm install jsdoc ink-docstrap --save-dev
+ou
+> npm install
+
+Clean (si necessaire...)
 > rm -rf ./jsdoc/build/*
 
-JSDoc
-> cd ./jsdoc/config
-> ./modules/jsdoc/jsdoc.js -c jsdoc.json 
+Génération de la JSDoc
+> ./node_modules/jsdoc/jsdoc.js -c jsdoc.json 
 
 puis, executer dans un navigateur ./jsdoc/build/index.html

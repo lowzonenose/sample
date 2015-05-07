@@ -1,0 +1,23 @@
+EXECUTION EN MODE CONSOLE 
+
+Répertoire d'execution
+> cd ./test/jasmine/config/
+
+Installation des modules
+> npm install --save-dev
+
+Éxécution d'un exemple (cli)
+> mkdir 
+> cd ./test/jasmine/config/sample (ou sample_requirejs)
+> ../node_modules/.bin/jasmine init
+> ../node_modules/.bin/jasmine examples
+> ../node_modules/.bin/jasmine
+
+Éxécution des tests
+> cd ./test/jasmine/
+> ./config/node_modules/.bin/jasmine
+
+FIXME
+Comment concilier les 2 modes (web/node) ?
+cf. projet ~/Workspace-IGN/API/test-jasmine-reporters
+cf. https://github.com/jrburke/amdefine

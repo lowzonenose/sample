@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Sample Loader</title>
+        <link rel="stylesheet" type="text/css" href="../css/content.css">
+        <script type="text/javascript" src="../lib/require.js"></script>
+        <script type="text/javascript">
+            var config = {
+                "baseUrl": "../src/require/gp/",
+            };
+            requirejs(config, ["loader"], function (Loader) {
+                var loader  = new Loader();
+                    loader.require([
+                        "utils.js",
+                        "script-1.js",
+                        "script-1_1.js",
+                        "script-1_2.js",
+                        "script-1_3.js",
+                        "script-2.js"], 
+                        function(message) {
+                                // Callback
+                                console.log(message);
+                                var node    = document.createTextNode("Loaded !");
+                                var element = document.getElementById("result");
+                                element.appendChild(node);
+                        });
+            });
+			
+        </script>
+    </head>
+    <body>
+        <div id="loader">Exemple d'implementation d'une classe JS (cf. console)</div>
+        <textarea id="code" rows="20" cols="50">
+        var loader  = new Loader();
+            loader.require([
+                "utils.js",
+                "script-1.js",
+                "script-1_1.js",
+                "script-1_2.js",
+                "script-1_3.js",
+                "script-2.js"], 
+                function(message) {
+                        // Callback
+                        console.log(message);
+                });
+        </textarea>
+        <div id="result"></div>
+    </body>
+</html>

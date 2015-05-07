@@ -1,7 +1,19 @@
-# download
-version jasmine standalone v2.2.0
-https://github.com/jasmine/jasmine/releases/tag/v2.2.0
+SOUS JASMINE
 
-# executer
-SpecRunner.html dans un navigateur
-puis, ouvrir la console
+# Téléchargement de la version jasmine standalone v2.2.0
+    https://github.com/jasmine/jasmine/releases/tag/v2.2.0
+
+# Éxécution en mode browser
+    specRunner.html dans un navigateur
+    puis, ouvrir la console (debug)
+
+# Éxécution en mode browser avec RequireJS
+    specRunner-require.html dans un navigateur
+    puis, ouvrir la console (debug)
+
+# Éxécution en mode console
+    cf. jasmine/config/README
+
+SOUS MOCHA
+
+    TODO ?
