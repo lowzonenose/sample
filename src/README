@@ -1,10 +1,4 @@
 OK  : classes avec namespace GP={}
 OK  : classes sans namespace 
-NOK : classes sous requirejs avec namespace GP={}
+OK  : classes sous requirejs avec namespace GP={}
 OK  : classes sous requirejs sans namespace GP={}
-
-
-FIXME 
-Comment mettre en place des classes sous requirejs avec un namespace ?
-
-

@@ -26,8 +26,8 @@ define(["loader"], function (Loader) {
         // INFO
         // appel du constructeur de la classe mère
         // avec passage de param.
-        GP.Loader.apply(this, arguments);
-        
+        Loader.apply(this, arguments);
+     
         // INFO
         // autre manière d'appeller le constructeur :
         //      this.base = Loader;
@@ -41,7 +41,7 @@ define(["loader"], function (Loader) {
     /**
      * heritage des comportements de la classe mère
      */
-    LoaderExtend.prototype = Object.create(GP.Loader.prototype);
+    LoaderExtend.prototype = Object.create(Loader.prototype);
     
     /**
      * surcharge d'un comportement de la classe mère
@@ -116,5 +116,5 @@ define(["loader"], function (Loader) {
         
     };
     
-    return GP.LoaderExtend;
+    return LoaderExtend;
 });

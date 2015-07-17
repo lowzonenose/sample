@@ -1,0 +1,13 @@
+test avec requirejs
+
+sample_requirejs_namespace
+--------------------------
+<script data-main="../src/require/gp/cfg"  src="../lib/require.js"></script>
++
+requirejs(["loader"], function (Loader) {// CODE //}
+
+
+sample_requirejs_namespace_2
+----------------------------
+<script data-main="cfg-2" src="../lib/require.js"></script>
++ code dans "cfg-2"

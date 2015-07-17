@@ -3,13 +3,12 @@
     <head>
         <title>Sample Loader</title>
         <link rel="stylesheet" type="text/css" href="../css/content.css">
-        <script type="text/javascript" src="../lib/require.js"></script>
+        <script data-main="../src/require/gp/cfg-1"  src="../lib/require.js"></script>
         <script type="text/javascript">
-            var config = {
-                "baseUrl": "../src/require/gp/",
-            };
-            requirejs(config, ["loader"], function (Loader) {
-                var loader  = new Loader();
+            
+            requirejs(["gp", "loader"], function (GP, Loader) {
+				
+                var loader  = new GP.Loader();
                     loader.require([
                         "utils.js",
                         "script-1.js",
@@ -31,7 +30,7 @@
     <body>
         <div id="loader">Exemple d'implementation d'une classe JS (cf. console)</div>
         <textarea id="code" rows="20" cols="50">
-        var loader  = new Loader();
+        var loader  = new GP.Loader();
             loader.require([
                 "utils.js",
                 "script-1.js",

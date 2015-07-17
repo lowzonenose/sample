@@ -8,6 +8,7 @@
  *  
  * @module Loader
  */
+ 
 
 define(function() {
 	
@@ -28,7 +29,7 @@ define(function() {
      * @param {String} options.insert - before or head (true)/after or body (false)
      * @param {String} options.async - true/false
      */
-    function Loader(options) {
+    function Loader (options) {
         
         if (!(this instanceof Loader)) {
             throw new TypeError("Loader constructor cannot be called as a function.");
