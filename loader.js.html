@@ -1,0 +1,521 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<title>Sample Class JS Source: loader.js</title>
+
+	<!--[if lt IE 9]>
+	<script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+	<![endif]-->
+	<link type="text/css" rel="stylesheet" href="styles/sunlight.default.css">
+
+	<link type="text/css" rel="stylesheet" href="styles/site.darkly.css">
+
+</head>
+
+<body>
+
+<div class="navbar navbar-default navbar-fixed-top navbar-inverse">
+<div class="container">
+	<div class="navbar-header">
+		<a class="navbar-brand" href="index.html">Sample Class JS</a>
+	</div>
+	<div class="navbar-collapse">
+		<ul class="nav navbar-nav">
+			
+			<li class="dropdown">
+				<a href="namespaces.list.html" class="dropdown-toggle" data-toggle="dropdown">Namespaces<b class="caret"></b></a>
+				<ul class="dropdown-menu inline">
+					<li><a href="GP.html">GP</a></li>
+				</ul>
+			</li>
+			
+			<li class="dropdown">
+				<a href="modules.list.html" class="dropdown-toggle" data-toggle="dropdown">Modules<b class="caret"></b></a>
+				<ul class="dropdown-menu inline">
+					<li><a href="module-Loader.html">Loader</a></li><li><a href="module-LoaderExtend.html">LoaderExtend</a></li>
+				</ul>
+			</li>
+			
+			<li class="dropdown">
+				<a href="classes.list.html" class="dropdown-toggle" data-toggle="dropdown">Classes<b class="caret"></b></a>
+				<ul class="dropdown-menu inline">
+					<li><a href="Loader.html">Loader</a></li><li><a href="LoaderExtend.html">LoaderExtend</a></li>
+				</ul>
+			</li>
+			
+			<li class="dropdown">
+				<a href="tutorials.list.html" class="dropdown-toggle" data-toggle="dropdown">Tutorials<b class="caret"></b></a>
+				<ul class="dropdown-menu inline">
+					<li><a href="tutorial-Class.html">Class</a></li><li><a href="tutorial-Heritage.html">Heritage</a></li><li><a href="tutorial-Include.html">Include</a></li><li><a href="tutorial-Member.html">Member</a></li><li><a href="tutorial-Method.html">Method</a></li><li><a href="tutorial-Namespace.html">Namespace</a></li>
+				</ul>
+			</li>
+			
+		</ul>
+	</div>
+</div>
+</div>
+
+
+<div class="container">
+<div class="row">
+
+	
+	<div class="col-md-12">
+	
+		<div id="main">
+        		
+
+	<h1 class="page-title">Source: loader.js</h1>
+        
+<section>
+	<article>
+		<pre
+			class="sunlight-highlight-javascript linenums">/**
+ * Exemple d'implementation du classe JS avec RequireJS avec les instructions JSDoc.
+ * 
+ * Référence sur l'implementation d'une classe en JS :
+ * cf. [http://code-weblog.com/](http://code-weblog.com/programmation-orientee-objet-en-javascript/)
+ *  
+ *  @module module:Loader
+ */
+ 
+define(function() {
+	
+    // INFO
+    // Forces the JavaScript engine into strict mode
+    // cf. http://stackoverflow.com/questions/1335851/what-does-use-strict-do-in-javascript-and-what-is-the-reasoning-behind-it
+    
+    "use strict";
+	
+    /**
+     * Exemple de constructeur (fonction)
+     * 
+     * @constructor
+     * @alias Loader
+     * @param {Object} options
+     * @param {String} options.scope
+     * @param {String} options.onsuccess - function callback success
+     * @param {String} options.onerror - function callback error
+     * @param {String} options.insert - before or head (true)/after or body (false)
+     * @param {String} options.async - true/false
+     */
+    function Loader (options) {
+        
+        if (!(this instanceof Loader)) {
+            throw new TypeError("Loader constructor cannot be called as a function.");
+        }
+        
+        /* Exemple d'attribut d'instance 
+         *        
+         * @member {Object} 
+         */
+        this.options = options || __getDefaultOptions();
+        
+        if (this.options == null) {
+            throw new Error("options undefined ?!");
+        }
+        
+        // INFO
+        // par defaut, on met toujours des callback...
+        if (this.options.onsuccess == null) {
+            /**
+             * Description
+             * @method onsuccess
+             * @param {String} message
+             * @private
+             */
+            this.options.onsuccess = function(message) {
+                console.log("[CALLBACK] onsuccess : " + message);
+            };
+        }
+        if (this.options.onerror == null) {
+            /**
+             * Description
+             * @method onerror
+             * @param {String} message
+             * @private
+             */
+            this.options.onerror = function(message) {
+                console.log("[CALLBACK] onerror : " + message);
+            };
+        }
+        
+        // INFO
+        // par defaut, le scope du callback = classe...
+        if (this.options.scope == null) {
+            this.options.scope = this;
+        }
+        
+        // INFO
+        // par defaut, on insert les scripts à la fin dans le tag &lt;head>
+        if (this.options.insert == null) {
+            this.options.insert = true;
+        }
+        
+        // INFO
+        // par defaut,  not asynchronously loaded scripts
+        if (this.options.async == null) {
+            this.options.async = false;
+        }
+    };
+    
+    /**
+     * Exemple d'attribut de la classe.
+     * 
+     * @memberOf Loader
+     * @example 
+     *      console.log(Loader.SETTINGS);
+     */
+    Loader.SETTINGS = {
+        scope    : this,
+        insert   : true,
+        async    : false,
+        onerror  : function (message) {
+            console.log("[CALLBACK] onerror : " + message);
+        },
+        onsuccess: function(message) {
+            console.log("[CALLBACK] onsuccess : " + message);
+        }
+    };
+
+    /**
+     * Exemple de méthodes de la classe (static).
+     * 
+     * @memberOf Loader
+     * @method Loader.getLocalOptions
+     * @return {Loader.SETTINGS} Settings par defaut
+     * @example 
+     *      console.log(Loader.getLocalOptions());
+     */
+    Loader.getLocalOptions = function () {
+
+        // INFO 
+        // Note that 'this' does not refer to the Loader object from inside this method.
+
+        return Loader.SETTINGS;
+
+    };
+    
+    /**
+     * Exemple de méthodes de la classe (private)
+     * 
+     * @private
+     * @memberOf Loader
+     * @method Loader.getLocalOptions
+     * @return {Loader.SETTINGS} Settings par defaut
+     * @example 
+     *      // appel dans la classe ou l'instance
+     *      __getDefaultOptions.call(this);
+     */
+    function __getDefaultOptions () {
+        
+        // INFO 
+        // fonction privée utilisable uniquement au sein de la classe ou dans une instance !
+        // Par contre, on n'a pas d'utilisation du mot clé 'this' 
+        // sauf si on passe par l'appel via 'call' ou 'apply'.
+        
+        return Loader.SETTINGS;
+    };
+    
+    
+    // INFO
+    // All methods added to a Class' prototype are public (visible); they are able to 
+    // access the properties and methods of the Loader class via the `this` keyword.
+    
+    
+    Loader.prototype = {
+        /** 
+         * @lends module:Loader# 
+         */
+        
+        // INFO
+    	// Whenever you replace an Object's Prototype, you need to repoint
+    	// the base Constructor back at the original constructor Function, 
+    	// otherwise `instanceof` calls will fail.
+    	
+    	/**
+    	 * Exemple de constructeur (alias)
+    	 */
+        constructor: Loader,
+
+        /**
+         * Exemple de méthodes d'instance (public)
+         * 
+         * @method require
+         * @param {Array}  scripts
+         * @param {Function} callback_success
+         * @param {Function} callback_error
+         */
+        require: function (scripts, callback_success, callback_error) {
+            
+            // INFO
+            // ces variables de l'instances sont publiques.
+            this.loadCount      = 0;
+            this.totalRequired  = scripts.length;
+
+            // INFO
+            // on surcharge les callback par defaut
+            if (callback_success != null &amp;&amp; typeof callback_success == 'function') {
+                this.options.onsuccess = callback_success;
+            }
+            
+            if (callback_error != null &amp;&amp; typeof callback_error == 'function') {
+                this.options.onerror = callback_error;
+            }
+
+            for (var i = 0; i &lt; scripts.length; i++) {
+                // INFO
+                // appel de la méthode privée avec passage de param.
+                __importScript.apply(this, [scripts[i]]);
+            }
+        },
+
+        /**
+         * Exemple de méthodes d'instance (public)
+         * 
+         * @method onLoaded
+         * @param {Object} evt
+         */
+        onLoaded: function (evt) {
+            this.loadCount++;
+
+            if (this.loadCount == this.totalRequired) {
+                var message = "All Scripts Loaded!";
+                this.options.onsuccess.call(this.options.scope, message);
+            }
+        },
+        
+        /**
+         * Exemple de méthodes d'instance (public)
+         * 
+         * @method onLoadError
+         * @param {Object} error
+         */
+        onLoadError: function (error) {
+            // FIXME nettoyage à faire !
+            var message = "The script " + error.target.src + " is not accessible.";
+            this.options.onerror.call(this.options.scope, message);
+        },
+
+        /**
+         * Exemple de méthodes d'instance (public)
+         * 
+         * @method onLoadSuccess
+         * @param {Object} evt
+         * @param {String} url
+         */
+        onLoadSuccess: function (evt, url) {
+            console.log("loading script : " + url);
+        }
+    };
+
+    // INFO
+    // Méthodes privées
+    // Elles sont appelées par des méthodes publiques de l'instance 
+    // Ex. 
+    //      var scripts = [];
+    //      __importScript.apply(this, scripts);
+    // 
+    // Référence sur l'implementation 'private or static method' : 
+    // cf. http://philipwalton.com/articles/implementing-private-and-protected-members-in-javascript/
+    
+    /**
+     * Exemple de méthodes d'instance (private)
+     * 
+     * Référence sur l'implementation 'private or static method' : 
+     * cf. [http://philipwalton.com/](http://philipwalton.com/articles/implementing-private-and-protected-members-in-javascript/)
+     *
+     * @private
+     * @method __importScript
+     * @param {String} src
+     */
+    function __importScript (src) {
+            
+        var self = this;
+
+        var oScript = document.createElement('script');
+        oScript.type = "text/javascript";
+        // FIXME async or defer !?
+        oScript.async = this.options.async;
+        oScript.src = src;
+
+        /**
+         * Méthodes d'instance
+         * Erreur de chargement d'un script
+         * @method onerror
+         * @param {Object} error
+         * @private
+         */
+        oScript.onerror = function (error) { 
+            self.onLoadError(error);
+        };
+
+        /**
+         * Méthodes d'instance
+         * Succes du chargement d'un script
+         * @method onload
+         * @param {Object} event
+         * @private
+         */
+        oScript.onload = function (event) { 
+            self.onLoadSuccess(event, src);
+        };
+
+        oScript.addEventListener('load', function (e) { self.onLoaded(e); }, false);
+
+        if (this.options.insert) {
+            var head = document.getElementsByTagName('head')[0];
+            head.appendChild(oScript);
+        }
+        else {
+            var body = document.getElementsByTagName('body')[0];
+            body.appendChild(oScript);
+        }
+    };
+    
+    return Loader;
+    
+});
+</pre>
+	</article>
+</section>
+
+
+
+
+
+		</div>
+	</div>
+
+	<div class="clearfix"></div>
+
+	
+
+</div>
+</div>
+
+
+<footer>
+
+	version 1.0.0
+	<br />
+
+
+	<span class="copyright">
+	Geoportail - Copyright (c) IGN, released under the BSD license
+	</span>
+	<br />
+
+<span class="jsdoc-message">
+	Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.3.0-beta3</a>
+	on Thu Aug 6th 2015 using the <a
+	href="https://github.com/terryweiss/docstrap">DocStrap template</a>.
+</span>
+</footer>
+
+<!--<script src="scripts/sunlight.js"></script>-->
+<script src="scripts/docstrap.lib.js"></script>
+<script src="scripts/bootstrap-dropdown.js"></script>
+<script src="scripts/toc.js"></script>
+
+<script>
+$( function () {
+	$( "[id*='$']" ).each( function () {
+		var $this = $( this );
+
+		$this.attr( "id", $this.attr( "id" ).replace( "$", "__" ) );
+	} );
+
+	$( "#toc" ).toc( {
+		anchorName  : function ( i, heading, prefix ) {
+			return $( heading ).attr( "id" ) || ( prefix + i );
+		},
+		selectors   : "h1,h2,h3,h4",
+		showAndHide : false,
+		scrollTo    : "100px"
+	} );
+
+	$( "#toc>ul" ).addClass( "nav nav-pills nav-stacked" );
+	$( "#main span[id^='toc']" ).addClass( "toc-shim" );
+	$( '.dropdown-toggle' ).dropdown();
+	//			$( ".tutorial-section pre, .readme-section pre" ).addClass( "sunlight-highlight-javascript" ).addClass( "linenums" );
+
+	$( ".tutorial-section pre, .readme-section pre" ).each( function () {
+		var $this = $( this );
+
+		var example = $this.find( "code" );
+		exampleText = example.html();
+		var lang = /{@lang (.*?)}/.exec( exampleText );
+		if ( lang && lang[1] ) {
+			exampleText = exampleText.replace( lang[0], "" );
+			example.html( exampleText );
+			lang = lang[1];
+		} else {
+			lang = "javascript";
+		}
+
+		if ( lang ) {
+
+			$this
+			.addClass( "sunlight-highlight-" + lang )
+			.addClass( "linenums" )
+			.html( example.html() );
+
+		}
+	} );
+
+	Sunlight.highlightAll( {
+		lineNumbers : true,
+		showMenu : true,
+		enableDoclinks : true
+	} );
+} );
+</script>
+
+
+
+<!--Navigation and Symbol Display-->
+
+<script>
+	$( function () {
+		$( '#main' ).localScroll( {
+			offset : { top : 60 } //offset by the height of your header (give or take a few px, see what works for you)
+		} );
+		$( "dt.name" ).each( function () {
+			var $this = $( this ).find("h4");
+			var icon = $( "<i/>" ).addClass( "icon-plus-sign" ).addClass( "pull-right" ).addClass( "icon-white" );
+			var dt = $(this);
+			var children = dt.next( "dd" );
+
+			dt.prepend( icon ).css( {cursor : "pointer"} );
+			dt.addClass( "member-collapsed" ).addClass( "member" );
+
+
+			children.hide();
+
+			dt.children().on( "click", function () {
+				children = dt.next( "dd" );
+				children.slideToggle( "fast", function () {
+
+					if ( children.is( ":visible" ) ) {
+						icon.addClass( "icon-minus-sign" ).removeClass( "icon-plus-sign" ).removeClass( "icon-white" );
+						dt.addClass( "member-open" ).animate( "member-collapsed" );
+					} else {
+						icon.addClass( "icon-plus-sign" ).removeClass( "icon-minus-sign" ).addClass( "icon-white" );
+						dt.addClass( "member-collapsed" ).removeClass( "member-open" );
+					}
+				} );
+			} );
+
+		} );
+	} );
+</script>
+
+
+<!--Google Analytics-->
+
+
+</body>
+</html>

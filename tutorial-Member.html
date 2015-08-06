@@ -3,7 +3,7 @@
 <html lang="en">
 <head>
 	<meta charset="utf-8">
-	<title>Sample Class JS Index</title>
+	<title>Sample Class JS Member</title>
 
 	<!--[if lt IE 9]>
 	<script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
@@ -62,62 +62,91 @@
 <div class="row">
 
 	
-	<div class="col-md-8">
+	<div class="col-md-12">
 	
 		<div id="main">
-        		
+        		<section class="tutorial-section">
 
-	
-	<span class="page-title">Index</span>
-	
-	
+<header>
+    
 
+    <h2>Member</h2>
+</header>
 
+<article>
+    <p>Attribut de la classe</p>
+<pre class="prettyprint source lang-javascript"><code>var Template = (function () {
 
+    &quot;use strict&quot;;
 
+    // constructeur
+    function Template() {}
 
+    // attribut de la classe
+    Template.ATTRIBUTS = {};
 
+    // instance de la classe
+    Template.prototype = {
 
+        // constructeur : alias
+        constructor: Template,
 
+        // méthode
+        getAttributs: function () {
+            // appel attribut de la classe
+            return Template.ATTRIBUTS;
+        }
+    };
+}());</code></pre><p>Appel </p>
+<pre class="prettyprint source lang-javascript"><code> Template.ATTRIBUTS = {
+    attr1: &quot;test&quot;,
+    attr2: &quot;test&quot;
+};
 
+var MyTemplate = new Template();
+MyTemplate.getAttributs(); // RETURN : {attr1: &quot;test&quot;, attr2: &quot;test&quot;}</code></pre><p>Attribut de l'instance</p>
+<ul>
+<li>public</li>
+</ul>
+<pre class="prettyprint source lang-javascript"><code>var Template = (function () {
 
+    &quot;use strict&quot;;
 
-	
-	
+    // constructeur
+    function Template() {
+        // attribut de l'instance
+        this.attributs.data = [];
+    }
 
+    // instance de la classe
+    Template.prototype = {
 
+        // constructeur : alias
+        constructor: Template,
 
+        // méthode
+        getAttributs: function () {
+            // appel attribut public
+            return this.attributs.data;
+        }
+    };
+}());</code></pre><p>Appel</p>
+<pre class="prettyprint source lang-javascript"><code>var MyTemplate = new Template();
+MyTemplate.attributs.data.push(&quot;test&quot;);
+MyTemplate.getAttributs(); // RETURN : [&quot;test&quot;]</code></pre><ul>
+<li>private</li>
+</ul>
+<p>TODO</p>
+<pre class="prettyprint source lang-javascript"><code>...</code></pre>
+</article>
 
-
-    <section class="readme-section">
-        <article><h1>Exemple d'implementation d'une classe en JS</h1><p><a href="https://coveralls.io/r/lowzonenose/sample"><img src="https://coveralls.io/repos/lowzonenose/sample/badge.svg" alt="Coverage Status"></a>
-<a href="https://travis-ci.org/lowzonenose/sample"><img src="https://travis-ci.org/lowzonenose/sample.svg" alt="Build Status"></a></p>
-<h2>JSDoc</h2><pre class="prettyprint source"><code>### Génération
-cf. jsdoc/config/README
-
-### Exécution
-Ouvrir la page HTML &quot;jsdoc/build/index.html&quot;</code></pre><h2>Execution des Tests</h2><pre class="prettyprint source"><code>cf. test/README</code></pre><h2>Exemples</h2><pre class="prettyprint source"><code>### classe
-Ouvrir la page HTML &quot;samples/sample.html&quot;
-
-### héritage
-Ouvrir la page HTML &quot;samples/sample_extend.html&quot;</code></pre></article>
-    </section>
-
-
-
-
-
-
+</section>
 
 		</div>
 	</div>
 
 	<div class="clearfix"></div>
 
-	
-		<div class="col-md-3">
-			<div id="toc" class="col-md-3"></div>
-		</div>
 	
 
 </div>
