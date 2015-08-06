@@ -1,13 +1,10 @@
-/* global module */
-
 /**
- * Description
+ * Exemple d'implementation du classe JS avec RequireJS avec les instructions JSDoc.
  * 
- *  Référence sur l'implementation d'une classe en JS :
- *  cf. http://code-weblog.com/programmation-orientee-objet-en-javascript/
+ * Référence sur l'implementation d'une classe en JS :
+ * cf. [http://code-weblog.com/](http://code-weblog.com/programmation-orientee-objet-en-javascript/)
  *  
- * @namespace GP
- * @module Loader
+ *  @module module:Loader
  */
 var GP = GP || {};
 GP.Loader = (function () {
@@ -19,9 +16,10 @@ GP.Loader = (function () {
     "use strict";
 	
     /**
-     * Constructeur
+     * Exemple de constructeur (fonction)
      * 
-     * @method Loader
+     * @constructor
+     * @alias Loader
      * @param {Object} options
      * @param {String} options.scope
      * @param {String} options.onsuccess - function callback success
@@ -29,15 +27,15 @@ GP.Loader = (function () {
      * @param {String} options.insert - before or head (true)/after or body (false)
      * @param {String} options.async - true/false
      */
-    function Loader(options) {
+    function Loader (options) {
         
         if (!(this instanceof Loader)) {
             throw new TypeError("Loader constructor cannot be called as a function.");
         }
         
-        /**
-         * Attributs d'instance 
-         * (définis dans le constructeur)
+        /* Exemple d'attribut d'instance 
+         *        
+         * @member {Object} 
          */
         this.options = options || __getDefaultOptions();
         
@@ -90,9 +88,9 @@ GP.Loader = (function () {
     };
     
     /**
-     * Attributs de classe
+     * Exemple d'attribut de la classe.
      * 
-     * @static
+     * @memberOf Loader
      * @example 
      *      console.log(Loader.SETTINGS);
      */
@@ -109,10 +107,10 @@ GP.Loader = (function () {
     };
 
     /**
-     * Méthodes de classe
+     * Exemple de méthodes de la classe (static).
      * 
-     * @function getLocalOptions
-     * @static
+     * @memberOf Loader
+     * @method Loader.getLocalOptions
      * @return {Loader.SETTINGS} Settings par defaut
      * @example 
      *      console.log(Loader.getLocalOptions());
@@ -127,9 +125,11 @@ GP.Loader = (function () {
     };
     
     /**
-     * Méthodes de classe (private)
+     * Exemple de méthodes de la classe (private)
      * 
-     * @function _getDefaultOptions
+     * @private
+     * @memberOf Loader
+     * @method Loader.getLocalOptions
      * @return {Loader.SETTINGS} Settings par defaut
      * @example 
      *      // appel dans la classe ou l'instance
@@ -150,22 +150,25 @@ GP.Loader = (function () {
     // All methods added to a Class' prototype are public (visible); they are able to 
     // access the properties and methods of the Loader class via the `this` keyword.
     
+    
     Loader.prototype = {
-
+        /** 
+         * @lends module:Loader# 
+         */
+        
         // INFO
     	// Whenever you replace an Object's Prototype, you need to repoint
     	// the base Constructor back at the original constructor Function, 
     	// otherwise `instanceof` calls will fail.
     	
     	/**
-    	 * Constructeur
-    	 * @constructor
-         * @alias Loader
+    	 * Exemple de constructeur (alias)
     	 */
         constructor: Loader,
 
         /**
-         * Méthodes d'instance
+         * Exemple de méthodes d'instance (public)
+         * 
          * @method require
          * @param {Array}  scripts
          * @param {Function} callback_success
@@ -196,8 +199,8 @@ GP.Loader = (function () {
         },
 
         /**
-         * Méthodes d'instance
-         * Callback d'import de tous les scripts
+         * Exemple de méthodes d'instance (public)
+         * 
          * @method onLoaded
          * @param {Object} evt
          */
@@ -211,8 +214,8 @@ GP.Loader = (function () {
         },
         
         /**
-         * Méthodes d'instance
-         * Callback d'erreur de chargement d'un script
+         * Exemple de méthodes d'instance (public)
+         * 
          * @method onLoadError
          * @param {Object} error
          */
@@ -223,8 +226,8 @@ GP.Loader = (function () {
         },
 
         /**
-         * Méthodes d'instance
-         * Callback du succes du chargement d'un script
+         * Exemple de méthodes d'instance (public)
+         * 
          * @method onLoadSuccess
          * @param {Object} evt
          * @param {String} url
@@ -245,9 +248,12 @@ GP.Loader = (function () {
     // cf. http://philipwalton.com/articles/implementing-private-and-protected-members-in-javascript/
     
     /**
-     * Méthodes d'instance
+     * Exemple de méthodes d'instance (private)
      * 
-     * Import d'un script 
+     * Référence sur l'implementation 'private or static method' : 
+     * cf. [http://philipwalton.com/](http://philipwalton.com/articles/implementing-private-and-protected-members-in-javascript/)
+     *
+     * @private
      * @method __importScript
      * @param {String} src
      */
@@ -298,5 +304,3 @@ GP.Loader = (function () {
     return Loader;
     
 }());
-
-// module.exports = GP.Loader;

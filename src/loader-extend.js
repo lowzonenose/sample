@@ -1,11 +1,11 @@
-/* global module */
-
 /**
- * Description
+ * Exemple d'implementation d'un heritage en JS avec RequireJS avec les instructions JSDoc.
  * 
- * @namespace GP
- * @module LoaderExtend
- * @extends Loader
+ * Référence sur l'implementation d'une classe en JS :
+ * cf. [http://code-weblog.com/](http://code-weblog.com/programmation-orientee-objet-en-javascript/)
+ * 
+ * @module module:LoaderExtend
+ * @extends module:Loader
  */
 
 LoaderExtend = (function () {
@@ -13,10 +13,10 @@ LoaderExtend = (function () {
     "use strict";
     
     /**
-     * Constructeur
+     * Exemple de constructeur (fonction)
      * 
-     * @method LoaderExtend
-     * @see Loader
+     * @constructor 
+     * @alias LoaderExtend 
      */
     function LoaderExtend () {
         
@@ -28,7 +28,7 @@ LoaderExtend = (function () {
         // appel du constructeur de la classe mère
         // avec passage de param.
         Loader.apply(this, arguments);
-        
+     
         // INFO
         // autre manière d'appeller le constructeur :
         //      this.base = Loader;
@@ -39,13 +39,22 @@ LoaderExtend = (function () {
         this.options.insert = true;
     };
     
+    /** 
+     * @lends module:LoaderExtend# 
+     */
+    
     /**
      * heritage des comportements de la classe mère
      */
     LoaderExtend.prototype = Object.create(Loader.prototype);
+   
+    /**
+     * Exemple de constructeur (alias)
+     */
+    LoaderExtend.prototype.constructor = LoaderExtend;
     
     /**
-     * surcharge d'un comportement de la classe mère
+     * Exemple de surcharge d'un comportement de la classe mère
      * 
      * @method require
      * @param {Array}  scripts
@@ -75,12 +84,12 @@ LoaderExtend = (function () {
     };
     
     /**
-     * ajout d'un comportement spécifique à la classe fille
-     * 
+     * Exemple d'ajout d'un comportement spécifique à la classe fille
+     *
      * @method importScript
      * @param {type} src
      */
-    LoaderExtend.prototype.importScript = function (src) {
+    LoaderExtend.prototype .importScript = function (src) {
             
         var self = this;
 
@@ -114,10 +123,8 @@ LoaderExtend = (function () {
 
         var head = document.getElementsByTagName('head')[0];
             head.appendChild(oScript);
-        
+
     };
     
     return LoaderExtend;
 }());
-
-module.exports = LoaderExtend;
