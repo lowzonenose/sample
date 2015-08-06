@@ -1,4 +1,3 @@
-Template d'une classe avec héritage
 
 Class *TemplateExtend* extends *Template*
 

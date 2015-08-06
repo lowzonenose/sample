@@ -1,3 +1,5 @@
+/* global requirejs */
+
 requirejs.config({
     "baseUrl": ".",
     "paths": {}

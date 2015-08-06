@@ -10,7 +10,7 @@
 	<![endif]-->
 	<link type="text/css" rel="stylesheet" href="styles/sunlight.default.css">
 
-	<link type="text/css" rel="stylesheet" href="styles/site.cerulean.css">
+	<link type="text/css" rel="stylesheet" href="styles/site.darkly.css">
 
 </head>
 
@@ -25,22 +25,29 @@
 		<ul class="nav navbar-nav">
 			
 			<li class="dropdown">
+				<a href="namespaces.list.html" class="dropdown-toggle" data-toggle="dropdown">Namespaces<b class="caret"></b></a>
+				<ul class="dropdown-menu inline">
+					<li><a href="GP.html">GP</a></li>
+				</ul>
+			</li>
+			
+			<li class="dropdown">
 				<a href="modules.list.html" class="dropdown-toggle" data-toggle="dropdown">Modules<b class="caret"></b></a>
-				<ul class="dropdown-menu ">
+				<ul class="dropdown-menu inline">
 					<li><a href="module-Loader.html">Loader</a></li><li><a href="module-LoaderExtend.html">LoaderExtend</a></li>
 				</ul>
 			</li>
 			
 			<li class="dropdown">
 				<a href="classes.list.html" class="dropdown-toggle" data-toggle="dropdown">Classes<b class="caret"></b></a>
-				<ul class="dropdown-menu ">
-					<li><a href="Loader.html">Loader</a></li>
+				<ul class="dropdown-menu inline">
+					<li><a href="Loader.html">Loader</a></li><li><a href="LoaderExtend.html">LoaderExtend</a></li>
 				</ul>
 			</li>
 			
 			<li class="dropdown">
 				<a href="tutorials.list.html" class="dropdown-toggle" data-toggle="dropdown">Tutorials<b class="caret"></b></a>
-				<ul class="dropdown-menu ">
+				<ul class="dropdown-menu inline">
 					<li><a href="tutorial-Class.html">Class</a></li><li><a href="tutorial-Heritage.html">Heritage</a></li><li><a href="tutorial-Include.html">Include</a></li><li><a href="tutorial-Member.html">Member</a></li><li><a href="tutorial-Method.html">Method</a></li><li><a href="tutorial-Namespace.html">Namespace</a></li>
 				</ul>
 			</li>
@@ -58,8 +65,7 @@
 	<div class="col-md-8">
 	
 		<div id="main">
-    		<h1 class="page-title">Module: Loader</h1>
-			
+        		
 
 	<h1 class="page-title">Module: Loader</h1>
 <section>
@@ -73,9 +79,9 @@
     <div class="container-overview">
     
         
-            <div class="description"><p>Description</p>
-<p> Référence sur l'implementation d'une classe en JS :
- cf. http://code-weblog.com/programmation-orientee-objet-en-javascript/</p></div>
+            <div class="description"><p>Exemple d'implementation du classe JS avec RequireJS avec les instructions JSDoc.</p>
+<p>Référence sur l'implementation d'une classe en JS :
+cf. <a href="http://code-weblog.com/programmation-orientee-objet-en-javascript/">http://code-weblog.com/</a></p></div>
         
 
         
@@ -150,653 +156,6 @@
         <dl>
             
 <dt>
-    <h4 class="name" id=".getLocalOptions"><span class="type-signature">&lt;static> </span>getLocalOptions<span class="signature">()</span><span class="type-signature"> &rarr; {Loader.SETTINGS}</span></h4>
-    
-    
-</dt>
-<dd>
-    
-    
-    <div class="description">
-        <p>Méthodes de classe</p>
-    </div>
-    
-
-    
-
-    
-    
-    
-    
-    
-    
-<dl class="details">
-	
-
-	
-
-	
-
-	
-
-    
-
-    
-
-    
-
-    
-
-	
-
-	
-
-	
-
-	
-
-	
-
-
-
-	
-	<dt class="tag-source">Source:</dt>
-	<dd class="tag-source">
-		<ul class="dummy">
-			<li>
-				<a href="loader.js.html">loader.js</a>,
-				 <a href="loader.js.html#sunlight-1-line-109">line 109</a>
-			</li>
-		</ul>
-	</dd>
-	
-
-	
-
-	
-
-	
-</dl>
-
-    
-    
-
-    
-
-    
-
-    
-    
-    
-    
-    
-    <h5>Returns:</h5>
-    
-            
-<div class="param-desc">
-    <p>Settings par defaut</p>
-</div>
-
-
-
-<dl>
-	<dt>
-		Type
-	</dt>
-	<dd>
-		
-<span class="param-type">Loader.SETTINGS</span>
-
-
-	</dd>
-</dl>
-
-
-        
-    
-    
-        <h5>Example</h5>
-        
-    <pre class="sunlight-highlight-javascript">console.log(Loader.getLocalOptions());</pre>
-
-
-    
-</dd>
-
-        
-            
-<dt>
-    <h4 class="name" id="~__importScript"><span class="type-signature">&lt;inner> </span>__importScript<span class="signature">(src)</span><span class="type-signature"></span></h4>
-    
-    
-</dt>
-<dd>
-    
-    
-    <div class="description">
-        <p>Méthodes d'instance</p>
-<p>Import d'un script</p>
-    </div>
-    
-
-    
-
-    
-    
-    
-    
-        <h5>Parameters:</h5>
-        
-
-<table class="params table table-striped">
-    <thead>
-	<tr>
-		
-		<th>Name</th>
-		
-
-		<th>Type</th>
-
-		
-
-		
-
-		<th class="last">Description</th>
-	</tr>
-	</thead>
-
-	<tbody>
-	
-
-        <tr>
-            
-                <td class="name"><code>src</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">String</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"></td>
-        </tr>
-
-	
-	</tbody>
-</table>
-
-    
-    
-    
-<dl class="details">
-	
-
-	
-
-	
-
-	
-
-    
-
-    
-
-    
-
-    
-
-	
-
-	
-
-	
-
-	
-
-	
-
-
-
-	
-	<dt class="tag-source">Source:</dt>
-	<dd class="tag-source">
-		<ul class="dummy">
-			<li>
-				<a href="loader.js.html">loader.js</a>,
-				 <a href="loader.js.html#sunlight-1-line-245">line 245</a>
-			</li>
-		</ul>
-	</dd>
-	
-
-	
-
-	
-
-	
-</dl>
-
-    
-    
-
-    
-
-    
-
-    
-    
-    
-    
-    
-    
-    
-</dd>
-
-        
-            
-<dt>
-    <h4 class="name" id="~_getDefaultOptions"><span class="type-signature">&lt;inner> </span>_getDefaultOptions<span class="signature">()</span><span class="type-signature"> &rarr; {Loader.SETTINGS}</span></h4>
-    
-    
-</dt>
-<dd>
-    
-    
-    <div class="description">
-        <p>Méthodes de classe (private)</p>
-    </div>
-    
-
-    
-
-    
-    
-    
-    
-    
-    
-<dl class="details">
-	
-
-	
-
-	
-
-	
-
-    
-
-    
-
-    
-
-    
-
-	
-
-	
-
-	
-
-	
-
-	
-
-
-
-	
-	<dt class="tag-source">Source:</dt>
-	<dd class="tag-source">
-		<ul class="dummy">
-			<li>
-				<a href="loader.js.html">loader.js</a>,
-				 <a href="loader.js.html#sunlight-1-line-127">line 127</a>
-			</li>
-		</ul>
-	</dd>
-	
-
-	
-
-	
-
-	
-</dl>
-
-    
-    
-
-    
-
-    
-
-    
-    
-    
-    
-    
-    <h5>Returns:</h5>
-    
-            
-<div class="param-desc">
-    <p>Settings par defaut</p>
-</div>
-
-
-
-<dl>
-	<dt>
-		Type
-	</dt>
-	<dd>
-		
-<span class="param-type">Loader.SETTINGS</span>
-
-
-	</dd>
-</dl>
-
-
-        
-    
-    
-        <h5>Example</h5>
-        
-    <pre class="sunlight-highlight-javascript">// appel dans la classe ou l&#x27;instance
-     __getDefaultOptions.call(this);</pre>
-
-
-    
-</dd>
-
-        
-            
-<dt>
-    <h4 class="name" id="~Loader"><span class="type-signature">&lt;inner> </span>Loader<span class="signature">(options)</span><span class="type-signature"></span></h4>
-    
-    
-</dt>
-<dd>
-    
-    
-    <div class="description">
-        <p>Constructeur</p>
-    </div>
-    
-
-    
-
-    
-    
-    
-    
-        <h5>Parameters:</h5>
-        
-
-<table class="params table table-striped">
-    <thead>
-	<tr>
-		
-		<th>Name</th>
-		
-
-		<th>Type</th>
-
-		
-
-		
-
-		<th class="last">Description</th>
-	</tr>
-	</thead>
-
-	<tbody>
-	
-
-        <tr>
-            
-                <td class="name"><code>options</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">Object</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">
-                <h6>Properties</h6>
-                
-
-<table class="params table table-striped">
-    <thead>
-	<tr>
-		
-		<th>Name</th>
-		
-
-		<th>Type</th>
-
-		
-
-		
-
-		<th class="last">Description</th>
-	</tr>
-	</thead>
-
-	<tbody>
-	
-
-        <tr>
-            
-                <td class="name"><code>scope</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">String</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"></td>
-        </tr>
-
-	
-
-        <tr>
-            
-                <td class="name"><code>onsuccess</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">String</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"><p>function callback success</p></td>
-        </tr>
-
-	
-
-        <tr>
-            
-                <td class="name"><code>onerror</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">String</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"><p>function callback error</p></td>
-        </tr>
-
-	
-
-        <tr>
-            
-                <td class="name"><code>insert</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">String</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"><p>before or head (true)/after or body (false)</p></td>
-        </tr>
-
-	
-
-        <tr>
-            
-                <td class="name"><code>async</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">String</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"><p>true/false</p></td>
-        </tr>
-
-	
-	</tbody>
-</table>
-
-            </td>
-        </tr>
-
-	
-	</tbody>
-</table>
-
-    
-    
-    
-<dl class="details">
-	
-
-	
-
-	
-
-	
-
-    
-
-    
-
-    
-
-    
-
-	
-
-	
-
-	
-
-	
-
-	
-
-
-
-	
-	<dt class="tag-source">Source:</dt>
-	<dd class="tag-source">
-		<ul class="dummy">
-			<li>
-				<a href="loader.js.html">loader.js</a>,
-				 <a href="loader.js.html#sunlight-1-line-19">line 19</a>
-			</li>
-		</ul>
-	</dd>
-	
-
-	
-
-	
-
-	
-</dl>
-
-    
-    
-
-    
-
-    
-
-    
-    
-    
-    
-    
-    
-    
-</dd>
-
-        
-            
-<dt>
     <h4 class="name" id="~onLoaded"><span class="type-signature">&lt;inner> </span>onLoaded<span class="signature">(evt)</span><span class="type-signature"></span></h4>
     
     
@@ -805,8 +164,7 @@
     
     
     <div class="description">
-        <p>Méthodes d'instance
-Callback d'import de tous les scripts</p>
+        <p>Exemple de méthodes d'instance (public)</p>
     </div>
     
 
@@ -902,7 +260,7 @@ Callback d'import de tous les scripts</p>
 		<ul class="dummy">
 			<li>
 				<a href="loader.js.html">loader.js</a>,
-				 <a href="loader.js.html#sunlight-1-line-196">line 196</a>
+				 <a href="loader.js.html#sunlight-1-line-201">line 201</a>
 			</li>
 		</ul>
 	</dd>
@@ -942,8 +300,7 @@ Callback d'import de tous les scripts</p>
     
     
     <div class="description">
-        <p>Méthodes d'instance
-Callback d'erreur de chargement d'un script</p>
+        <p>Exemple de méthodes d'instance (public)</p>
     </div>
     
 
@@ -1039,7 +396,7 @@ Callback d'erreur de chargement d'un script</p>
 		<ul class="dummy">
 			<li>
 				<a href="loader.js.html">loader.js</a>,
-				 <a href="loader.js.html#sunlight-1-line-211">line 211</a>
+				 <a href="loader.js.html#sunlight-1-line-216">line 216</a>
 			</li>
 		</ul>
 	</dd>
@@ -1079,8 +436,7 @@ Callback d'erreur de chargement d'un script</p>
     
     
     <div class="description">
-        <p>Méthodes d'instance
-Callback du succes du chargement d'un script</p>
+        <p>Exemple de méthodes d'instance (public)</p>
     </div>
     
 
@@ -1199,7 +555,7 @@ Callback du succes du chargement d'un script</p>
 		<ul class="dummy">
 			<li>
 				<a href="loader.js.html">loader.js</a>,
-				 <a href="loader.js.html#sunlight-1-line-223">line 223</a>
+				 <a href="loader.js.html#sunlight-1-line-228">line 228</a>
 			</li>
 		</ul>
 	</dd>
@@ -1239,7 +595,7 @@ Callback du succes du chargement d'un script</p>
     
     
     <div class="description">
-        <p>Méthodes d'instance</p>
+        <p>Exemple de méthodes d'instance (public)</p>
     </div>
     
 
@@ -1381,7 +737,7 @@ Callback du succes du chargement d'un script</p>
 		<ul class="dummy">
 			<li>
 				<a href="loader.js.html">loader.js</a>,
-				 <a href="loader.js.html#sunlight-1-line-165">line 165</a>
+				 <a href="loader.js.html#sunlight-1-line-169">line 169</a>
 			</li>
 		</ul>
 	</dd>
@@ -1451,7 +807,7 @@ Callback du succes du chargement d'un script</p>
 
 <span class="jsdoc-message">
 	Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.3.0-beta3</a>
-	on Tue Apr 14th 2015 using the <a
+	on Thu Aug 6th 2015 using the <a
 	href="https://github.com/terryweiss/docstrap">DocStrap template</a>.
 </span>
 </footer>
@@ -1518,6 +874,41 @@ $( function () {
 
 
 <!--Navigation and Symbol Display-->
+
+<script>
+	$( function () {
+		$( '#main' ).localScroll( {
+			offset : { top : 60 } //offset by the height of your header (give or take a few px, see what works for you)
+		} );
+		$( "dt.name" ).each( function () {
+			var $this = $( this ).find("h4");
+			var icon = $( "<i/>" ).addClass( "icon-plus-sign" ).addClass( "pull-right" ).addClass( "icon-white" );
+			var dt = $(this);
+			var children = dt.next( "dd" );
+
+			dt.prepend( icon ).css( {cursor : "pointer"} );
+			dt.addClass( "member-collapsed" ).addClass( "member" );
+
+
+			children.hide();
+
+			dt.children().on( "click", function () {
+				children = dt.next( "dd" );
+				children.slideToggle( "fast", function () {
+
+					if ( children.is( ":visible" ) ) {
+						icon.addClass( "icon-minus-sign" ).removeClass( "icon-plus-sign" ).removeClass( "icon-white" );
+						dt.addClass( "member-open" ).animate( "member-collapsed" );
+					} else {
+						icon.addClass( "icon-plus-sign" ).removeClass( "icon-minus-sign" ).addClass( "icon-white" );
+						dt.addClass( "member-collapsed" ).removeClass( "member-open" );
+					}
+				} );
+			} );
+
+		} );
+	} );
+</script>
 
 
 <!--Google Analytics-->

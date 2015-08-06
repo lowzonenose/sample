@@ -35,8 +35,7 @@ define( function() {
         }
         
         /**
-         * Attributs d'instance 
-         * (définis dans le constructeur)
+         * Exemple d'attribut d'instance 
          */
         this.options = options || __getDefaultOptions();
         

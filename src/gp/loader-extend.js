@@ -1,8 +1,8 @@
 /* global module */
 
 /**
- * Description
- * 
+ * Description du module
+ * @class
  * @namespace GP
  * @module LoaderExtend
  * @extends Loader

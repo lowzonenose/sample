@@ -10,7 +10,7 @@
 	<![endif]-->
 	<link type="text/css" rel="stylesheet" href="styles/sunlight.default.css">
 
-	<link type="text/css" rel="stylesheet" href="styles/site.cerulean.css">
+	<link type="text/css" rel="stylesheet" href="styles/site.darkly.css">
 
 </head>
 
@@ -25,22 +25,29 @@
 		<ul class="nav navbar-nav">
 			
 			<li class="dropdown">
+				<a href="namespaces.list.html" class="dropdown-toggle" data-toggle="dropdown">Namespaces<b class="caret"></b></a>
+				<ul class="dropdown-menu inline">
+					<li><a href="GP.html">GP</a></li>
+				</ul>
+			</li>
+			
+			<li class="dropdown">
 				<a href="modules.list.html" class="dropdown-toggle" data-toggle="dropdown">Modules<b class="caret"></b></a>
-				<ul class="dropdown-menu ">
+				<ul class="dropdown-menu inline">
 					<li><a href="module-Loader.html">Loader</a></li><li><a href="module-LoaderExtend.html">LoaderExtend</a></li>
 				</ul>
 			</li>
 			
 			<li class="dropdown">
 				<a href="classes.list.html" class="dropdown-toggle" data-toggle="dropdown">Classes<b class="caret"></b></a>
-				<ul class="dropdown-menu ">
-					<li><a href="Loader.html">Loader</a></li>
+				<ul class="dropdown-menu inline">
+					<li><a href="Loader.html">Loader</a></li><li><a href="LoaderExtend.html">LoaderExtend</a></li>
 				</ul>
 			</li>
 			
 			<li class="dropdown">
 				<a href="tutorials.list.html" class="dropdown-toggle" data-toggle="dropdown">Tutorials<b class="caret"></b></a>
-				<ul class="dropdown-menu ">
+				<ul class="dropdown-menu inline">
 					<li><a href="tutorial-Class.html">Class</a></li><li><a href="tutorial-Heritage.html">Heritage</a></li><li><a href="tutorial-Include.html">Include</a></li><li><a href="tutorial-Member.html">Member</a></li><li><a href="tutorial-Method.html">Method</a></li><li><a href="tutorial-Namespace.html">Namespace</a></li>
 				</ul>
 			</li>
@@ -58,25 +65,23 @@
 	<div class="col-md-12">
 	
 		<div id="main">
-    		<h1 class="page-title">Source: loader.js</h1>
-			
+        		
 
-		<h1 class="page-title">Source: loader.js</h1>
-    
+	<h1 class="page-title">Source: loader.js</h1>
+        
 <section>
 	<article>
 		<pre
 			class="sunlight-highlight-javascript linenums">/**
- * Description
+ * Exemple d'implementation du classe JS avec RequireJS avec les instructions JSDoc.
  * 
- *  Référence sur l'implementation d'une classe en JS :
- *  cf. http://code-weblog.com/programmation-orientee-objet-en-javascript/
+ * Référence sur l'implementation d'une classe en JS :
+ * cf. [http://code-weblog.com/](http://code-weblog.com/programmation-orientee-objet-en-javascript/)
  *  
- * @namespace GP
- * @module Loader
+ *  @module module:Loader
  */
-var GP = GP || {};
-GP.Loader = (function () {
+ 
+define(function() {
 	
     // INFO
     // Forces the JavaScript engine into strict mode
@@ -85,9 +90,10 @@ GP.Loader = (function () {
     "use strict";
 	
     /**
-     * Constructeur
+     * Exemple de constructeur (fonction)
      * 
-     * @method Loader
+     * @constructor
+     * @alias Loader
      * @param {Object} options
      * @param {String} options.scope
      * @param {String} options.onsuccess - function callback success
@@ -95,15 +101,15 @@ GP.Loader = (function () {
      * @param {String} options.insert - before or head (true)/after or body (false)
      * @param {String} options.async - true/false
      */
-    function Loader(options) {
+    function Loader (options) {
         
         if (!(this instanceof Loader)) {
             throw new TypeError("Loader constructor cannot be called as a function.");
         }
         
-        /**
-         * Attributs d'instance 
-         * (définis dans le constructeur)
+        /* Exemple d'attribut d'instance 
+         *        
+         * @member {Object} 
          */
         this.options = options || __getDefaultOptions();
         
@@ -156,9 +162,9 @@ GP.Loader = (function () {
     };
     
     /**
-     * Attributs de classe
+     * Exemple d'attribut de la classe.
      * 
-     * @static
+     * @memberOf Loader
      * @example 
      *      console.log(Loader.SETTINGS);
      */
@@ -175,10 +181,10 @@ GP.Loader = (function () {
     };
 
     /**
-     * Méthodes de classe
+     * Exemple de méthodes de la classe (static).
      * 
-     * @function getLocalOptions
-     * @static
+     * @memberOf Loader
+     * @method Loader.getLocalOptions
      * @return {Loader.SETTINGS} Settings par defaut
      * @example 
      *      console.log(Loader.getLocalOptions());
@@ -193,9 +199,11 @@ GP.Loader = (function () {
     };
     
     /**
-     * Méthodes de classe (private)
+     * Exemple de méthodes de la classe (private)
      * 
-     * @function _getDefaultOptions
+     * @private
+     * @memberOf Loader
+     * @method Loader.getLocalOptions
      * @return {Loader.SETTINGS} Settings par defaut
      * @example 
      *      // appel dans la classe ou l'instance
@@ -216,22 +224,25 @@ GP.Loader = (function () {
     // All methods added to a Class' prototype are public (visible); they are able to 
     // access the properties and methods of the Loader class via the `this` keyword.
     
+    
     Loader.prototype = {
-
+        /** 
+         * @lends module:Loader# 
+         */
+        
         // INFO
     	// Whenever you replace an Object's Prototype, you need to repoint
     	// the base Constructor back at the original constructor Function, 
     	// otherwise `instanceof` calls will fail.
     	
     	/**
-    	 * Constructeur
-    	 * @constructor
-         * @alias Loader
+    	 * Exemple de constructeur (alias)
     	 */
         constructor: Loader,
 
         /**
-         * Méthodes d'instance
+         * Exemple de méthodes d'instance (public)
+         * 
          * @method require
          * @param {Array}  scripts
          * @param {Function} callback_success
@@ -262,8 +273,8 @@ GP.Loader = (function () {
         },
 
         /**
-         * Méthodes d'instance
-         * Callback d'import de tous les scripts
+         * Exemple de méthodes d'instance (public)
+         * 
          * @method onLoaded
          * @param {Object} evt
          */
@@ -277,8 +288,8 @@ GP.Loader = (function () {
         },
         
         /**
-         * Méthodes d'instance
-         * Callback d'erreur de chargement d'un script
+         * Exemple de méthodes d'instance (public)
+         * 
          * @method onLoadError
          * @param {Object} error
          */
@@ -289,8 +300,8 @@ GP.Loader = (function () {
         },
 
         /**
-         * Méthodes d'instance
-         * Callback du succes du chargement d'un script
+         * Exemple de méthodes d'instance (public)
+         * 
          * @method onLoadSuccess
          * @param {Object} evt
          * @param {String} url
@@ -311,9 +322,12 @@ GP.Loader = (function () {
     // cf. http://philipwalton.com/articles/implementing-private-and-protected-members-in-javascript/
     
     /**
-     * Méthodes d'instance
+     * Exemple de méthodes d'instance (private)
      * 
-     * Import d'un script 
+     * Référence sur l'implementation 'private or static method' : 
+     * cf. [http://philipwalton.com/](http://philipwalton.com/articles/implementing-private-and-protected-members-in-javascript/)
+     *
+     * @private
      * @method __importScript
      * @param {String} src
      */
@@ -363,7 +377,7 @@ GP.Loader = (function () {
     
     return Loader;
     
-}());
+});
 </pre>
 	</article>
 </section>
@@ -396,7 +410,7 @@ GP.Loader = (function () {
 
 <span class="jsdoc-message">
 	Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.3.0-beta3</a>
-	on Tue Apr 14th 2015 using the <a
+	on Thu Aug 6th 2015 using the <a
 	href="https://github.com/terryweiss/docstrap">DocStrap template</a>.
 </span>
 </footer>
@@ -463,6 +477,41 @@ $( function () {
 
 
 <!--Navigation and Symbol Display-->
+
+<script>
+	$( function () {
+		$( '#main' ).localScroll( {
+			offset : { top : 60 } //offset by the height of your header (give or take a few px, see what works for you)
+		} );
+		$( "dt.name" ).each( function () {
+			var $this = $( this ).find("h4");
+			var icon = $( "<i/>" ).addClass( "icon-plus-sign" ).addClass( "pull-right" ).addClass( "icon-white" );
+			var dt = $(this);
+			var children = dt.next( "dd" );
+
+			dt.prepend( icon ).css( {cursor : "pointer"} );
+			dt.addClass( "member-collapsed" ).addClass( "member" );
+
+
+			children.hide();
+
+			dt.children().on( "click", function () {
+				children = dt.next( "dd" );
+				children.slideToggle( "fast", function () {
+
+					if ( children.is( ":visible" ) ) {
+						icon.addClass( "icon-minus-sign" ).removeClass( "icon-plus-sign" ).removeClass( "icon-white" );
+						dt.addClass( "member-open" ).animate( "member-collapsed" );
+					} else {
+						icon.addClass( "icon-plus-sign" ).removeClass( "icon-minus-sign" ).addClass( "icon-white" );
+						dt.addClass( "member-collapsed" ).removeClass( "member-open" );
+					}
+				} );
+			} );
+
+		} );
+	} );
+</script>
 
 
 <!--Google Analytics-->

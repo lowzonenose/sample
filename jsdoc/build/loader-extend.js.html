@@ -10,7 +10,7 @@
 	<![endif]-->
 	<link type="text/css" rel="stylesheet" href="styles/sunlight.default.css">
 
-	<link type="text/css" rel="stylesheet" href="styles/site.cerulean.css">
+	<link type="text/css" rel="stylesheet" href="styles/site.darkly.css">
 
 </head>
 
@@ -25,22 +25,29 @@
 		<ul class="nav navbar-nav">
 			
 			<li class="dropdown">
+				<a href="namespaces.list.html" class="dropdown-toggle" data-toggle="dropdown">Namespaces<b class="caret"></b></a>
+				<ul class="dropdown-menu inline">
+					<li><a href="GP.html">GP</a></li>
+				</ul>
+			</li>
+			
+			<li class="dropdown">
 				<a href="modules.list.html" class="dropdown-toggle" data-toggle="dropdown">Modules<b class="caret"></b></a>
-				<ul class="dropdown-menu ">
+				<ul class="dropdown-menu inline">
 					<li><a href="module-Loader.html">Loader</a></li><li><a href="module-LoaderExtend.html">LoaderExtend</a></li>
 				</ul>
 			</li>
 			
 			<li class="dropdown">
 				<a href="classes.list.html" class="dropdown-toggle" data-toggle="dropdown">Classes<b class="caret"></b></a>
-				<ul class="dropdown-menu ">
-					<li><a href="Loader.html">Loader</a></li>
+				<ul class="dropdown-menu inline">
+					<li><a href="Loader.html">Loader</a></li><li><a href="LoaderExtend.html">LoaderExtend</a></li>
 				</ul>
 			</li>
 			
 			<li class="dropdown">
 				<a href="tutorials.list.html" class="dropdown-toggle" data-toggle="dropdown">Tutorials<b class="caret"></b></a>
-				<ul class="dropdown-menu ">
+				<ul class="dropdown-menu inline">
 					<li><a href="tutorial-Class.html">Class</a></li><li><a href="tutorial-Heritage.html">Heritage</a></li><li><a href="tutorial-Include.html">Include</a></li><li><a href="tutorial-Member.html">Member</a></li><li><a href="tutorial-Method.html">Method</a></li><li><a href="tutorial-Namespace.html">Namespace</a></li>
 				</ul>
 			</li>
@@ -58,31 +65,32 @@
 	<div class="col-md-12">
 	
 		<div id="main">
-    		<h1 class="page-title">Source: loader-extend.js</h1>
-			
+        		
 
-		<h1 class="page-title">Source: loader-extend.js</h1>
-    
+	<h1 class="page-title">Source: loader-extend.js</h1>
+        
 <section>
 	<article>
 		<pre
 			class="sunlight-highlight-javascript linenums">/**
- * Description
+ * Exemple d'implementation d'un heritage en JS avec RequireJS avec les instructions JSDoc.
  * 
- * @namespace GP
- * @module LoaderExtend
- * @extends Loader
+ * Référence sur l'implementation d'une classe en JS :
+ * cf. [http://code-weblog.com/](http://code-weblog.com/programmation-orientee-objet-en-javascript/)
+ * 
+ * @module module:LoaderExtend
+ * @extends module:Loader
  */
-var GP = GP || {};
-GP.LoaderExtend = (function () {
+
+define(["loader"], function (Loader) {
     
     "use strict";
     
     /**
-     * Constructeur
+     * Exemple de constructeur (fonction)
      * 
-     * @method LoaderExtend
-     * @see Loader
+     * @constructor 
+     * @alias LoaderExtend 
      */
     function LoaderExtend () {
         
@@ -93,8 +101,8 @@ GP.LoaderExtend = (function () {
         // INFO
         // appel du constructeur de la classe mère
         // avec passage de param.
-        GP.Loader.apply(this, arguments);
-        
+        Loader.apply(this, arguments);
+     
         // INFO
         // autre manière d'appeller le constructeur :
         //      this.base = Loader;
@@ -108,83 +116,95 @@ GP.LoaderExtend = (function () {
     /**
      * heritage des comportements de la classe mère
      */
-    LoaderExtend.prototype = Object.create(GP.Loader.prototype);
+    LoaderExtend.prototype = Object.create(Loader.prototype);
     
-    /**
-     * surcharge d'un comportement de la classe mère
-     * 
-     * @method require
-     * @param {Array}  scripts
-     * @param {Function} callback_success
-     * @param {Function} callback_error
-     */
-    LoaderExtend.prototype.require = function (scripts, callback_success, callback_error) {
-            
-        // INFO
-        // ces variables de l'instances sont publiques.
-        this.loadCount      = 0;
-        this.totalRequired  = scripts.length;
-
-        // INFO
-        // on surcharge les callback par defaut
-        if (callback_success != null &amp;&amp; typeof callback_success == 'function') {
-            this.options.onsuccess = callback_success;
-        }
-
-        if (callback_error != null &amp;&amp; typeof callback_error == 'function') {
-            this.options.onerror = callback_error;
-        }
-
-        for (var i = 0; i &lt; scripts.length; i++) {
-            this.importScript(scripts[i]);
-        }
-    };
     
-    /**
-     * ajout d'un comportement spécifique à la classe fille
-     * 
-     * @method importScript
-     * @param {type} src
-     */
-    LoaderExtend.prototype.importScript = function (src) {
-            
-        var self = this;
-
-        var oScript  = document.createElement('script');
-        oScript.type = "text/javascript";
-        oScript.src  = src;
-
-        /**
-         * Méthodes d'instance
-         * Erreur de chargement d'un script
-         * @method onerror
-         * @param {Object} error
-         * @private
+    LoaderExtend.prototype = {
+        /** 
+         * @lends module:LoaderExtend# 
          */
-        oScript.onerror = function (error) { 
-            self.onLoadError(error);
-        };
-
-        /**
-         * Méthodes d'instance
-         * Succes du chargement d'un script
-         * @method onload
-         * @param {Object} event
-         * @private
-         */
-        oScript.onload = function (event) { 
-            self.onLoadSuccess(event, src);
-        };
-
-        oScript.addEventListener('load', function (e) { self.onLoaded(e); }, false);
-
-        var head = document.getElementsByTagName('head')[0];
-            head.appendChild(oScript);
         
+        /**
+    	 * Exemple de constructeur (alias)
+    	 */
+        constructor: LoaderExtend,
+        
+        /**
+         * Exemple de surcharge d'un comportement de la classe mère
+         * 
+         * @method require
+         * @param {Array}  scripts
+         * @param {Function} callback_success
+         * @param {Function} callback_error
+         */
+        require : function (scripts, callback_success, callback_error) {
+            
+            // INFO
+            // ces variables de l'instances sont publiques.
+            this.loadCount      = 0;
+            this.totalRequired  = scripts.length;
+
+            // INFO
+            // on surcharge les callback par defaut
+            if (callback_success != null &amp;&amp; typeof callback_success == 'function') {
+                this.options.onsuccess = callback_success;
+            }
+
+            if (callback_error != null &amp;&amp; typeof callback_error == 'function') {
+                this.options.onerror = callback_error;
+            }
+
+            for (var i = 0; i &lt; scripts.length; i++) {
+                this.importScript(scripts[i]);
+            }
+        },
+    
+        /**
+         * Exemple d'ajout d'un comportement spécifique à la classe fille
+         *
+         * @method importScript
+         * @param {type} src
+         */
+        importScript : function (src) {
+            
+            var self = this;
+
+            var oScript  = document.createElement('script');
+            oScript.type = "text/javascript";
+            oScript.src  = src;
+
+            /**
+             * Méthodes d'instance
+             * Erreur de chargement d'un script
+             * @method onerror
+             * @param {Object} error
+             * @private
+             */
+            oScript.onerror = function (error) { 
+                self.onLoadError(error);
+            };
+
+            /**
+             * Méthodes d'instance
+             * Succes du chargement d'un script
+             * @method onload
+             * @param {Object} event
+             * @private
+             */
+            oScript.onload = function (event) { 
+                self.onLoadSuccess(event, src);
+            };
+
+            oScript.addEventListener('load', function (e) { self.onLoaded(e); }, false);
+
+            var head = document.getElementsByTagName('head')[0];
+                head.appendChild(oScript);
+
+        }
     };
     
     return LoaderExtend;
-}());
+});
 </pre>
 	</article>
 </section>
@@ -217,7 +237,7 @@ GP.LoaderExtend = (function () {
 
 <span class="jsdoc-message">
 	Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.3.0-beta3</a>
-	on Tue Apr 14th 2015 using the <a
+	on Thu Aug 6th 2015 using the <a
 	href="https://github.com/terryweiss/docstrap">DocStrap template</a>.
 </span>
 </footer>
@@ -284,6 +304,41 @@ $( function () {
 
 
 <!--Navigation and Symbol Display-->
+
+<script>
+	$( function () {
+		$( '#main' ).localScroll( {
+			offset : { top : 60 } //offset by the height of your header (give or take a few px, see what works for you)
+		} );
+		$( "dt.name" ).each( function () {
+			var $this = $( this ).find("h4");
+			var icon = $( "<i/>" ).addClass( "icon-plus-sign" ).addClass( "pull-right" ).addClass( "icon-white" );
+			var dt = $(this);
+			var children = dt.next( "dd" );
+
+			dt.prepend( icon ).css( {cursor : "pointer"} );
+			dt.addClass( "member-collapsed" ).addClass( "member" );
+
+
+			children.hide();
+
+			dt.children().on( "click", function () {
+				children = dt.next( "dd" );
+				children.slideToggle( "fast", function () {
+
+					if ( children.is( ":visible" ) ) {
+						icon.addClass( "icon-minus-sign" ).removeClass( "icon-plus-sign" ).removeClass( "icon-white" );
+						dt.addClass( "member-open" ).animate( "member-collapsed" );
+					} else {
+						icon.addClass( "icon-plus-sign" ).removeClass( "icon-minus-sign" ).addClass( "icon-white" );
+						dt.addClass( "member-collapsed" ).removeClass( "member-open" );
+					}
+				} );
+			} );
+
+		} );
+	} );
+</script>
 
 
 <!--Google Analytics-->

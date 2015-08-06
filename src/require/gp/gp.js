@@ -16,43 +16,48 @@
  * @namespace GP
  */
  
-define(['loader', 'loader-extend'], function(Loader, LoaderExtend){
+define(['loader', 'loader-extend'], 
+    function(Loader, LoaderExtend){
 	
-  var GP = window.GP || {
-        'version': '1.0.0',
-        'date': '2015',
-        'extend': function (ns_string, value) {
-                var parts = ns_string.split("."),
-                    parent = this,
-                    pl;
+        "use strict";
+        
+        // on determine l'environnement d'execution : browser ou non ?
+        var scope = typeof window !== 'undefined' ? window : {};
+        
+        // on voit s'il existe déjà cette variable, sinon on la met en place
+        var GP = scope.GP || {
+           "version": "1.0.0",
+           "date": "2015",
+           "extend": function (ns_string, value) {
+                    var parts = ns_string.split("."),
+                        parent = this,
+                        pl;
 
-                pl = parts.length;
+                    pl = parts.length;
 
-                for ( var i = 0; i < pl; i++ ) {
-                    // create a property if it doesn't exist
-                    if ( typeof parent[parts[i]] === "undefined" ) {
-                        parent[parts[i]] = {};
+                    for ( var i = 0; i < pl; i++ ) {
+                        // create a property if it doesn't exist
+                        if ( typeof parent[parts[i]] === "undefined" ) {
+                            parent[parts[i]] = {};
+                        }
+
+                        if(i === (pl-1)) {
+                           parent[parts[i]] = value;
+                        }
+
+                        parent = parent[parts[i]];
                     }
 
-                    if(i === (pl-1)) {
-                       parent[parts[i]] = value;
-                    }
-
-                    parent = parent[parts[i]];
+                    return this;
                 }
-
-                return this;
-            }
-        };
+        }; 
 
         // on declare les ns dan root global
         GP.extend('Loader', Loader);
         GP.extend('LoaderExtend', LoaderExtend);
         
-        // root global !
-        if (!window.GP) {
-            window.GP = GP;
-        }
-
-        return window.GP;
+        // on sauvegarde la variable dans l'env. 
+        scope.GP = GP;
+        
+        return scope.GP;
 });

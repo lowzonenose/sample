@@ -30,11 +30,18 @@ define(["loader-extend"], function (LoaderExtend) {
         });
 
 
-        it("OK : chargement des scripts", function() {
+        it("OK : chargement des scripts", function(done) {
 
+            var myMessage = "loading script";
             loader.require([
                 "../../samples/script-1.js",
-                "../../samples/script-2.js"]);
+                "../../samples/script-2.js"], 
+            function(message) {
+                // Callback
+                console.log(message);
+                expect(myMessage).toEqual(jasmine.stringMatching(/loading script/));
+                done();
+            });
         });
 
     });

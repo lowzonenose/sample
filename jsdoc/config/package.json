@@ -11,5 +11,10 @@
   "devDependencies": {
     "ink-docstrap": "~0.5.2",
     "jsdoc": "~3.3.0-beta2"
+  },
+  "dependencies": {
+    "jaguarjs-jsdoc": "0.0.1",
+    "jsdoc-dash-template": "0.0.6",
+    "jsdoc-oblivion": "0.0.4"
   }
 }
