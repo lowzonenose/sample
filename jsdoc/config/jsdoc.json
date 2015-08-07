@@ -2,7 +2,10 @@
 	"tags"      : {
 		"allowUnknownTags" : true
 	},
-	"plugins"   : ["plugins/markdown"],
+	"plugins"   : [
+                "plugins/markdown",
+                "node_modules/jsdoc-i18n-plugin"
+        ],
         "source"    : {
 		"include" : [
                         "../../src/require/gp/",
@@ -30,11 +33,20 @@
 		"parser"   : "gfm",
 		"hardwrap" : true
 	},
+        "i18n": {
+                "locale"   : "fr_FR", 
+                "directory": "./i18N",
+                "srcDir"   : "../../src/require/gp/",
+                "extension": ".js"
+        },
         "opts": {
-            "template": "node_modules/ink-docstrap/template/",
+            "template-inactif": "node_modules/ink-docstrap/template/",
             "template-inactif": "node_modules/jaguarjs-jsdoc/",
             "template-inactif": "node_modules/jsdoc-oblivion/template/",
             "template-inactif": "node_modules/jsdoc-dash-template",
+            "template"        : "node_modules/minami",
+            "template-inactif": "node_modules/jsdoc-simple-template",
+            "template-inactif": "node_modules/jsdoc-react",
             "encoding": "utf8",
             "destination": "../build/",
             "recurse": true,

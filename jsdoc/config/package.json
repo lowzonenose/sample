@@ -15,6 +15,10 @@
   "dependencies": {
     "jaguarjs-jsdoc": "0.0.1",
     "jsdoc-dash-template": "0.0.6",
-    "jsdoc-oblivion": "0.0.4"
+    "jsdoc-i18n-plugin": "0.0.2",
+    "jsdoc-oblivion": "0.0.4",
+    "jsdoc-react": "^0.3.2",
+    "jsdoc-simple-template": "0.0.1",
+    "minami": "^1.1.0"
   }
 }
