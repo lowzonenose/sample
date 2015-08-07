@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: loader-extend.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+
+    <h1 class="page-title">Source: loader-extend.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>/**
+ * Exemple d'implementation d'un heritage en JS avec RequireJS avec les instructions JSDoc.
+ * 
+ * Référence sur l'implementation d'une classe en JS :
+ * cf. [http://code-weblog.com/](http://code-weblog.com/programmation-orientee-objet-en-javascript/)
+ * 
+ * @module module:LoaderExtend
+ * @extends module:Loader
+ */
+
+define(["loader"], function (Loader) {
+    
+    "use strict";
+    
+    /**
+     * Exemple de constructeur (fonction)
+     * 
+     * @constructor 
+     * @alias LoaderExtend 
+     */
+    function LoaderExtend () {
+        
+        if (!(this instanceof LoaderExtend)) {
+            throw new TypeError("LoaderExtend constructor cannot be called as a function.");
+        }
+        
+        // INFO
+        // appel du constructeur de la classe mère
+        // avec passage de param.
+        Loader.apply(this, arguments);
+     
+        // INFO
+        // autre manière d'appeller le constructeur :
+        //      this.base = Loader;
+        //      this.base(arguments);
+        
+        // INFO
+        // on surcharge la valeur
+        this.options.insert = true;
+    };
+    
+    /** 
+     * @lends module:LoaderExtend# 
+     */
+    
+    /**
+     * heritage des comportements de la classe mère
+     */
+    LoaderExtend.prototype = Object.create(Loader.prototype);
+   
+    /**
+     * Exemple de constructeur (alias)
+     */
+    LoaderExtend.prototype.constructor = LoaderExtend;
+    
+    /**
+     * Exemple de surcharge d'un comportement de la classe mère
+     * 
+     * @method require
+     * @param {Array}  scripts
+     * @param {Function} callback_success
+     * @param {Function} callback_error
+     */
+    LoaderExtend.prototype.require = function (scripts, callback_success, callback_error) {
+            
+        // INFO
+        // ces variables de l'instances sont publiques.
+        this.loadCount      = 0;
+        this.totalRequired  = scripts.length;
+
+        // INFO
+        // on surcharge les callback par defaut
+        if (callback_success != null &amp;&amp; typeof callback_success == 'function') {
+            this.options.onsuccess = callback_success;
+        }
+
+        if (callback_error != null &amp;&amp; typeof callback_error == 'function') {
+            this.options.onerror = callback_error;
+        }
+
+        for (var i = 0; i &lt; scripts.length; i++) {
+            this.importScript(scripts[i]);
+        }
+    };
+    
+    /**
+     * Exemple d'ajout d'un comportement spécifique à la classe fille
+     *
+     * @method importScript
+     * @param {type} src
+     */
+    LoaderExtend.prototype .importScript = function (src) {
+            
+        var self = this;
+
+        var oScript  = document.createElement('script');
+        oScript.type = "text/javascript";
+        oScript.src  = src;
+
+        /**
+         * Méthodes d'instance
+         * Erreur de chargement d'un script
+         * @method onerror
+         * @param {Object} error
+         * @private
+         */
+        oScript.onerror = function (error) { 
+            self.onLoadError(error);
+        };
+
+        /**
+         * Méthodes d'instance
+         * Succes du chargement d'un script
+         * @method onload
+         * @param {Object} event
+         * @private
+         */
+        oScript.onload = function (event) { 
+            self.onLoadSuccess(event, src);
+        };
+
+        oScript.addEventListener('load', function (e) { self.onLoaded(e); }, false);
+
+        var head = document.getElementsByTagName('head')[0];
+            head.appendChild(oScript);
+
+    };
+    
+    return LoaderExtend;
+});
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-Loader.html">Loader</a></li><li><a href="module-LoaderExtend.html">LoaderExtend</a></li></ul><h3>Classes</h3><ul><li><a href="Loader.html">Loader</a></li><li><a href="LoaderExtend.html">LoaderExtend</a></li></ul><h3>Namespaces</h3><ul><li><a href="GP.html">GP</a></li></ul><h3>Tutorials</h3><ul><li><a href="tutorial-Class.html">Class</a></li><li><a href="tutorial-Heritage.html">Heritage</a></li><li><a href="tutorial-Include.html">Include</a></li><li><a href="tutorial-Member.html">Member</a></li><li><a href="tutorial-Method.html">Method</a></li><li><a href="tutorial-Namespace.html">Namespace</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.3.0-beta3</a> on Fri Aug 07 2015 13:13:53 GMT+0200 (CEST)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>
